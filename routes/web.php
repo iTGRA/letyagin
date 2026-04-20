@@ -8,3 +8,7 @@ Route::get('/', function () {
         'siteName' => config('app.name'),
     ]);
 })->name('home');
+
+Route::get('/lab', function () {
+    return Inertia::render('Lab');
+})->name('lab');
