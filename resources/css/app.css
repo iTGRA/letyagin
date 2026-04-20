@@ -1,12 +1,12 @@
 /* =============================================================================
- * Отель Летягинъ — входная точка стилей
+ * Отель ЛетягинЪ — входная точка стилей
  *
  * Порядок импортов критичен для Tailwind 4:
- *   1. tokens.css — @theme-директивы регистрируют --color-*, --font-*
- *      как источники утилит.
- *   2. fonts.css — @font-face декларации.
+ *   1. tokens.css — @theme-директивы регистрируют токены как источники утилит.
+ *   2. fonts.css — @font-face декларации (через @fontsource).
  *   3. tailwindcss — сам Tailwind. ДОЛЖЕН быть после tokens.
- *   4. @layer base — element-selector resets (иначе unlayered CSS бьёт утилиты).
+ *   4. @source — подсказки Tailwind'у где искать классы для дерева.
+ *   5. @layer base — element resets (R3: иначе побеждает Tailwind utilities).
  * ========================================================================== */
 
 @import './tokens.css';
@@ -19,17 +19,21 @@
 @source '../**/*.jsx';
 @source '../**/*.js';
 
+/* -----------------------------------------------------------------------------
+ * Editorial reset — в @layer base (R3)
+ * -------------------------------------------------------------------------- */
+
 @layer base {
   html {
     background: var(--color-paper);
     color: var(--color-ink);
-    font-family: var(--font-serif);
+    font-family: var(--font-body);
     font-size: 17px;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
-    /* overflow-x: clip (НЕ hidden) — иначе ломается position:sticky */
+    /* overflow-x: clip (НЕ hidden) — R2, иначе sticky ломается */
     overflow-x: clip;
   }
 
@@ -41,10 +45,10 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-serif);
+    font-family: var(--font-display);
     font-weight: 500;
     letter-spacing: -0.01em;
-    line-height: 1.1;
+    line-height: 1.05;
     margin: 0;
   }
 
@@ -54,17 +58,44 @@
     color: inherit;
     text-decoration: none;
   }
+
+  button {
+    font-family: var(--font-ui);
+  }
+
+  /* Формы: нулевая рамка по умолчанию, применим 1px-линию в field__input */
+  input, textarea, select {
+    font-family: var(--font-body);
+    font-size: inherit;
+    color: inherit;
+  }
 }
 
+/* -----------------------------------------------------------------------------
+ * Selection и focus — единый визуальный язык через rust-акцент
+ * -------------------------------------------------------------------------- */
+
 ::selection {
-  background: var(--color-sepia);
+  background: var(--color-rust);
   color: var(--color-paper);
 }
 
 *:focus-visible {
-  outline: 2px dashed var(--color-sepia);
+  outline: 2px dashed var(--color-rust);
   outline-offset: 3px;
 }
+
+/* -----------------------------------------------------------------------------
+ * Tabular numbers — для таблиц метража, цифр в таймлайне
+ * -------------------------------------------------------------------------- */
+
+.tnum {
+  font-feature-settings: "tnum", "kern";
+}
+
+/* -----------------------------------------------------------------------------
+ * prefers-reduced-motion — обязательное отключение всего
+ * -------------------------------------------------------------------------- */
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

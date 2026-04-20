@@ -1,37 +1,73 @@
 /* =============================================================================
- * Отель Летягинъ — токены дизайн-системы (Tailwind 4 @theme)
+ * Отель ЛетягинЪ — токены дизайн-системы (Tailwind 4 @theme)
  *
- * PLACEHOLDER. Будет заменён после утверждения брифа и дизайн-системы.
- * Пока — нейтральная sepia-палитра старого отеля, чтобы каркас жил.
+ * Палитра утверждена в BRIEF/AUDIT (раздел DESIGN 4.4):
+ *   — читается как «интерьер русской купеческой усадьбы XIX века, переосмысленный современно»
+ *   — отличается от Сомова (тот более сепия-кремовый) и от Дома Майера (тот итальянский-фруктовый)
  *
  * Токены здесь автоматически превращаются в Tailwind utilities:
- *   --color-paper  → bg-paper, text-paper, border-paper
- *   --font-serif   → font-serif
- *   --duration-slow → duration-slow
+ *   --color-ink      → bg-ink, text-ink, border-ink
+ *   --color-paper    → bg-paper
+ *   --color-rust     → bg-rust  (Burnt Orange — кирпич Летягина, CTA)
+ *   --color-moss     → bg-moss  (оливковая патина — детали)
+ *   --color-surface  → bg-surface (светлые карточки)
+ *   --font-display   → font-display
+ *   --font-body      → font-body
+ *   --font-ui        → font-ui
+ *   --duration-slow  → duration-slow
  * ========================================================================== */
 
 @theme {
-  /* --- Цвета --- */
-  --color-paper:        #f5efe3;   /* основной фон — старая бумага */
-  --color-ink:          #1c1815;   /* основной текст — глубокий коричневый */
-  --color-sepia:        #8a6a3b;   /* акцент — золотистая сепия */
-  --color-sepia-deep:   #5c4422;   /* тёмная сепия для hover/активных */
-  --color-cream:        #ebe1cd;   /* светлая сепия для секций */
-  --color-line:         #c9ba9c;   /* цвет линий и разделителей */
-  --color-error:        #a83d2b;   /* ошибки форм */
+  /* ---------------------------------------------------------------------------
+   * Цвета
+   * ------------------------------------------------------------------------ */
 
-  /* --- Шрифты (placeholder — заменим по брифу) --- */
-  --font-serif: 'Georgia', 'Times New Roman', serif;
-  --font-sans:  -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  /* Основная пара: текст и фон */
+  --color-ink:        #3A1B1C;   /* Rum Raisin — почти чёрный, винно-бордовый */
+  --color-paper:      #CFC6BB;   /* Snow Drizzle — тёплый купеческий лён */
 
-  /* --- Моушн --- */
+  /* Акценты */
+  --color-rust:       #A54A20;   /* Burnt Orange — кирпич Летягина, главный CTA */
+  --color-rust-deep:  #7d3818;   /* Rust hover/pressed */
+  --color-moss:       #635729;   /* Moss Green — оливковая патина */
+
+  /* Поверхности */
+  --color-surface:    #F5F1EC;   /* светлые карточки, модальные, secondary-секции */
+  --color-line:       #8a7e6e;   /* линии, разделители, тонкие границы */
+
+  /* Системные */
+  --color-error:      #a83d2b;   /* ошибки форм */
+  --color-success:    #5c7a3a;   /* подтверждения форм */
+
+  /* Алиасы для читаемости — НЕ использовать как отдельные токены, просто note */
+
+  /* ---------------------------------------------------------------------------
+   * Типографика — Google Fonts (compromise до лицензии на New Rome)
+   * Cormorant Garamond — display (римский serif, благородный характер)
+   * Arimo               — body (читаемый гротеск, метрически совместим с Arial)
+   * Manrope             — UI (геометрический sans, бесплатный аналог Geometria)
+   * ------------------------------------------------------------------------ */
+  --font-display: 'Cormorant Garamond', 'Cormorant', Georgia, 'Times New Roman', serif;
+  --font-body:    'Arimo', -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  --font-ui:      'Manrope', -apple-system, 'Helvetica Neue', Arial, sans-serif;
+
+  /* Sans — по умолчанию = body (для Tailwind `font-sans`) */
+  --font-sans: 'Arimo', -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  --font-serif: 'Cormorant Garamond', 'Cormorant', Georgia, 'Times New Roman', serif;
+
+  /* ---------------------------------------------------------------------------
+   * Моушн
+   * ------------------------------------------------------------------------ */
   --duration-quick:    180ms;
   --duration-standard: 320ms;
   --duration-slow:     560ms;
   --ease-standard:  cubic-bezier(0.2, 0.6, 0.2, 1);
   --ease-editorial: cubic-bezier(0.22, 0.61, 0.36, 1);
 
-  /* --- Радиусы (минимальные, в духе исторического дома) --- */
+  /* ---------------------------------------------------------------------------
+   * Радиусы — минимальные, в духе исторического дома (brief R3)
+   * ------------------------------------------------------------------------ */
   --radius-sm: 2px;
   --radius-md: 4px;
+  --radius-lg: 8px;
 }

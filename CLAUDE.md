@@ -135,7 +135,55 @@ GET  /              → HomeController@index (пока inline-Inertia в web.php
 
 ### Текущие правила
 
-*(пусто — добавляем по мере появления инцидентов)*
+### L1. При rsync локаль→прод исключать `bootstrap/cache/*.php`
+
+```bash
+rsync -az \
+  --exclude='bootstrap/cache/*.php' \   # ← важно
+  --exclude='bootstrap/ssr' \
+  --exclude='.env' \
+  ./ na-ugle:/var/www/letyagin/
+```
+
+**Почему:** локально `composer install` ставит dev-зависимости (Pail, Pint,
+Collision). Laravel кеширует их в `bootstrap/cache/packages.php` и
+`services.php`. Rsync'ом эти файлы попадают на прод, где `composer install
+--no-dev` dev-пакеты не установил — и на первом запросе Laravel пытается
+загрузить `Laravel\Pail\PailServiceProvider` → фатал 500.
+
+**Симптом:** `Class "Laravel\Pail\PailServiceProvider" not found` в
+`storage/logs/laravel.log`.
+
+**Фикс в инциденте:**
+```bash
+rm bootstrap/cache/packages.php bootstrap/cache/services.php
+composer dump-autoload --optimize --no-dev
+php artisan package:discover
+```
+
+**Как применять:** всегда исключать `bootstrap/cache/*.php` из rsync-деплоя
+и регенерировать на сервере через `package:discover`. Это также часть
+штатной деплой-последовательности (добавить в будущий CI/CD).
+
+**Инцидент-триггер:** 2026-04-20, Фаза 2A, первый rsync после установки
+@fontsource пакетов.
+
+### L2. После rsync восстанавливать права на `storage` и `bootstrap/cache`
+
+```bash
+sudo chown -R claude:www-data /var/www/letyagin/storage /var/www/letyagin/bootstrap/cache
+sudo chmod -R 775 /var/www/letyagin/storage /var/www/letyagin/bootstrap/cache
+```
+
+**Почему:** rsync `-a` сохраняет локальный owner (user `ilyakhalzov`,
+group `staff`). На прод-сервере php-fpm запускается под `www-data` —
+и `tempnam()` падает на записи в `storage/framework/cache/data/`, выдавая
+`500 tempnam(): file created in the system's temporary directory`.
+
+**Как применять:** после каждого rsync — восстанавливать ownership на
+storage и bootstrap/cache. Войдёт в deploy-скрипт.
+
+**Инцидент-триггер:** 2026-04-20, тот же rsync что и L1.
 
 ---
 

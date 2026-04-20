@@ -1,64 +1,84 @@
 /**
- * Pages/Home.jsx — временная заглушка до получения фактуры отеля.
+ * Pages/Home.jsx — заглушка Фазы 2A (брендинг).
  *
- * После утверждения брифа и дизайн-системы — переверстаем в полноценный
- * лендинг. Пока: имя, короткое обещание, контакт.
+ * Задача: показать как выглядят утверждённые токены и типографика в живую:
+ *   — палитра Rum Raisin / Snow Drizzle / Burnt Orange / Moss Green
+ *   — Cormorant Garamond (display) + Arimo (body) + Manrope (UI)
+ *
+ * Заменим на полноценную главную с 16 блоками в Фазе 2C, когда будут
+ * модели, контент и фото.
  */
 
 import { Head } from '@inertiajs/react';
 
-export default function Home({ siteName = 'Отель Летягинъ' }) {
+export default function Home({ siteName = 'Отель ЛетягинЪ' }) {
     return (
         <>
             <Head title="Главная" />
 
-            <main className="min-h-screen flex flex-col">
-                {/* Верхняя декоративная строка — сепия */}
-                <div className="w-full h-1 bg-[color:var(--color-sepia)]" aria-hidden="true" />
+            <main className="min-h-screen flex flex-col bg-paper text-ink">
+                {/* Тонкая линия сверху — акцент в духе интерьерной отделки */}
+                <div className="w-full h-[3px] bg-rust" aria-hidden="true" />
 
-                {/* Хедер — пусто, только лого-строка по центру */}
-                <header className="pt-8 md:pt-10 flex justify-center">
-                    <div className="uppercase tracking-[0.3em] text-[10px] md:text-xs text-[color:var(--color-sepia-deep)]">
-                        Самара · Волга · 2026
+                {/* Хедер */}
+                <header className="pt-10 md:pt-14 px-6 md:px-12 flex items-center justify-between">
+                    <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.24em] text-[11px] text-ink/70">
+                        Самара · ул. Самарская, 69
+                    </div>
+                    <div className="hidden md:block font-[family-name:var(--font-ui)] uppercase tracking-[0.24em] text-[11px] text-ink/70">
+                        +7 987 979-00-00
                     </div>
                 </header>
 
                 {/* Центральный блок */}
-                <section className="flex-1 flex items-center justify-center px-6">
-                    <div className="max-w-2xl text-center">
-                        <h1 className="text-6xl md:text-8xl lg:text-9xl leading-[0.95] mb-8 md:mb-10">
+                <section className="flex-1 flex items-center justify-center px-6 py-20">
+                    <div className="max-w-3xl text-center">
+                        <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.3em] text-[10px] md:text-xs text-rust mb-8">
+                            Бутик-отель · 19 номеров · Ресторан Дуся
+                        </div>
+
+                        <h1 className="font-[family-name:var(--font-display)] text-6xl md:text-8xl lg:text-[130px] leading-[0.95] mb-10 text-ink">
                             {siteName}
                         </h1>
 
-                        <div className="w-16 h-px bg-[color:var(--color-sepia)] mx-auto mb-8" aria-hidden="true" />
+                        <div className="w-20 h-px bg-rust mx-auto mb-10" aria-hidden="true" />
 
-                        <p className="text-lg md:text-xl text-[color:var(--color-ink)] opacity-80 mb-3">
-                            Сайт в разработке.
-                        </p>
-                        <p className="text-base md:text-lg text-[color:var(--color-ink)] opacity-60">
-                            Скоро здесь будут номера, вид на Волгу
-                            <br className="hidden md:block" />
-                            и живой образ отеля.
+                        <p className="font-[family-name:var(--font-body)] text-lg md:text-xl leading-relaxed text-ink/80 mb-4 max-w-xl mx-auto">
+                            Бутик-отель в историческом особняке в центре старого города.
                         </p>
 
-                        <div className="mt-14 md:mt-20 flex flex-col md:flex-row gap-4 md:gap-8 items-center justify-center text-sm">
+                        <p className="font-[family-name:var(--font-body)] text-base md:text-lg italic leading-relaxed text-ink/60 max-w-xl mx-auto">
+                            Сайт в разработке — скоро откроется в новом облике.
+                        </p>
+
+                        {/* CTA */}
+                        <div className="mt-14 md:mt-20 flex flex-col md:flex-row gap-5 items-center justify-center">
                             <a
-                                href="tel:+78001234567"
-                                className="inline-block px-6 py-3 border border-[color:var(--color-ink)] hover:bg-[color:var(--color-ink)] hover:text-[color:var(--color-paper)] transition-colors duration-[var(--duration-standard)]"
+                                href="tel:+79879790000"
+                                className="font-[family-name:var(--font-ui)] uppercase tracking-[0.16em] text-xs md:text-sm inline-block px-8 py-4 bg-rust text-paper hover:bg-[color:var(--color-rust-deep)] transition-colors duration-[var(--duration-standard)]"
                             >
-                                связаться с нами
+                                Позвонить
                             </a>
-                            <span className="opacity-50 text-xs uppercase tracking-widest">
-                                по вопросам размещения
-                            </span>
+                            <a
+                                href="mailto:info@letyaginhotel.com"
+                                className="font-[family-name:var(--font-ui)] uppercase tracking-[0.16em] text-xs md:text-sm inline-block px-8 py-4 border border-ink text-ink hover:bg-ink hover:text-paper transition-colors duration-[var(--duration-standard)]"
+                            >
+                                Написать
+                            </a>
                         </div>
                     </div>
                 </section>
 
+                {/* Разделитель — moss */}
+                <div className="w-full h-px bg-moss/30" aria-hidden="true" />
+
                 {/* Футер */}
-                <footer className="px-6 py-8 text-center">
-                    <div className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-[color:var(--color-sepia-deep)] opacity-70">
-                        © 2026 · {siteName}
+                <footer className="px-6 md:px-12 py-10 flex flex-col md:flex-row items-center justify-between gap-4">
+                    <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.24em] text-[10px] md:text-xs text-ink/60">
+                        © 2026 · Бутик-отель ЛетягинЪ
+                    </div>
+                    <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.24em] text-[10px] md:text-xs text-ink/50">
+                        Историческое здание 1883 года
                     </div>
                 </footer>
             </main>

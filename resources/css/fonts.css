@@ -1,12 +1,31 @@
 /* =============================================================================
- * Отель Летягинъ — @font-face декларации
+ * Отель ЛетягинЪ — шрифты
  *
- * Пусто до утверждения брифа и выкладки WOFF2 в public/fonts/.
- * После брифа добавить блоки вида:
- *   @font-face {
- *     font-family: 'Caslon Pro';
- *     src: url('/fonts/caslon-pro.woff2') format('woff2');
- *     font-weight: 400;
- *     font-display: swap;
- *   }
+ * Стратегия: Google Fonts через @fontsource (локально, без внешних CDN).
+ * Это compromise до принятия решения по лицензии на New Rome Trial
+ * (см. BRIEF §6 · DESIGN 4.4 «Типографика»).
+ *
+ * Если перейдём на New Rome — заменим --font-display в tokens.css + подключим
+ * лицензированные WOFF2 в public/fonts/ и подключим их @font-face блоком здесь.
+ *
+ * Импорты @fontsource работают через Vite npm-резолвинг (`@import
+ * '@fontsource/...'` отрабатывается как CSS-модуль).
  * ========================================================================== */
+
+/* Cormorant Garamond — display (H1, H2, крупные заголовки) */
+@import '@fontsource/cormorant-garamond/400.css';
+@import '@fontsource/cormorant-garamond/500.css';
+@import '@fontsource/cormorant-garamond/600.css';
+@import '@fontsource/cormorant-garamond/700.css';
+@import '@fontsource/cormorant-garamond/400-italic.css';
+
+/* Arimo — body (длинный текст, read-friendly) */
+@import '@fontsource/arimo/400.css';
+@import '@fontsource/arimo/500.css';
+@import '@fontsource/arimo/700.css';
+
+/* Manrope — UI (кнопки, меню, табы, счётчики, аккордеоны) */
+@import '@fontsource/manrope/400.css';
+@import '@fontsource/manrope/500.css';
+@import '@fontsource/manrope/600.css';
+@import '@fontsource/manrope/700.css';
