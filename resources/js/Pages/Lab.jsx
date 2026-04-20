@@ -237,7 +237,7 @@ function GridDemo() {
  * ========================================================================== */
 
 function Palette() {
-    const items = [
+    const base = [
         { name: 'Rum Raisin',    hex: '#3A1B1C', token: 'ink',     role: 'текст, ink-секции',        onDark: true,  bg: '#3A1B1C' },
         { name: 'Snow Drizzle',  hex: '#CFC6BB', token: 'paper',   role: 'основной фон — лён',       onDark: false, bg: '#CFC6BB' },
         { name: 'Burnt Orange',  hex: '#A54A20', token: 'rust',    role: 'CTA, акценты — кирпич',    onDark: true,  bg: '#A54A20' },
@@ -245,28 +245,161 @@ function Palette() {
         { name: 'Light Surface', hex: '#F5F1EC', token: 'surface', role: 'карточки, secondary',       onDark: false, bg: '#F5F1EC' },
         { name: 'Line',          hex: '#8A7E6E', token: 'line',    role: 'разделители 1px',           onDark: true,  bg: '#8A7E6E' },
     ];
+    const extended = [
+        { name: 'Slate',  hex: '#2E3D4D', token: 'slate',  role: 'редкий cool — ночной Холл',       onDark: true,  bg: '#2E3D4D' },
+        { name: 'Brick',  hex: '#9C2D2A', token: 'brick',  role: 'материал — серьёзный CTA',         onDark: true,  bg: '#9C2D2A' },
+        { name: 'Coral',  hex: '#CB5041', token: 'coral',  role: 'friendly — тэги, announcement',    onDark: true,  bg: '#CB5041' },
+        { name: 'Sage',   hex: '#899370', token: 'sage',   role: 'светлый moss — surface Дуси',      onDark: true,  bg: '#899370' },
+        { name: 'Stone',  hex: '#A39A8C', token: 'stone',  role: 'нейтральный warm — ambient',       onDark: true,  bg: '#A39A8C' },
+    ];
+
     return (
-        <div className="grid grid-cols-12 gap-px bg-ink/15">
-            {items.map((c) => (
-                <div
-                    key={c.token}
-                    className="col-span-6 md:col-span-4 aspect-square p-6 md:p-8 flex flex-col justify-between"
-                    style={{ background: c.bg, color: c.onDark ? '#F5F1EC' : '#3A1B1C' }}
-                >
-                    <div>
-                        <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.2em] text-[10px] opacity-70 mb-2 tnum">
-                            {c.hex}
+        <div className="space-y-14">
+            {/* Base palette — 6 swatches 2x3 */}
+            <div>
+                <Label>Базовая · 6 токенов</Label>
+                <div className="grid grid-cols-12 gap-px bg-ink/15">
+                    {base.map((c) => (
+                        <div
+                            key={c.token}
+                            className="col-span-6 md:col-span-4 aspect-square p-6 md:p-8 flex flex-col justify-between"
+                            style={{ background: c.bg, color: c.onDark ? '#F5F1EC' : '#3A1B1C' }}
+                        >
+                            <div>
+                                <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.2em] text-[10px] opacity-70 mb-2 tnum">
+                                    {c.hex}
+                                </div>
+                                <div className="font-[family-name:var(--font-display)] text-3xl md:text-5xl leading-none">
+                                    {c.name}
+                                </div>
+                            </div>
+                            <div className="flex justify-between items-end font-[family-name:var(--font-ui)] uppercase tracking-[0.18em] text-[10px]">
+                                <span className="opacity-80 max-w-[60%]">{c.role}</span>
+                                <span className="opacity-60">—{c.token}</span>
+                            </div>
                         </div>
-                        <div className="font-[family-name:var(--font-display)] text-3xl md:text-5xl leading-none">
-                            {c.name}
+                    ))}
+                </div>
+            </div>
+
+            {/* Extended palette — 5 swatches, row-of-5 on lg, 3+2 on md, 2+2+1 on mobile */}
+            <div>
+                <Label>Расширенная · 5 новых точечных токенов</Label>
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-px bg-ink/15">
+                    {extended.map((c) => (
+                        <div
+                            key={c.token}
+                            className="aspect-[4/5] md:aspect-square p-5 md:p-6 flex flex-col justify-between"
+                            style={{ background: c.bg, color: c.onDark ? '#F5F1EC' : '#3A1B1C' }}
+                        >
+                            <div>
+                                <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.18em] text-[10px] opacity-70 mb-2 tnum">
+                                    {c.hex}
+                                </div>
+                                <div className="font-[family-name:var(--font-display)] text-2xl md:text-3xl leading-none">
+                                    {c.name}
+                                </div>
+                            </div>
+                            <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.16em] text-[10px]">
+                                <div className="opacity-80 mb-1 leading-snug">{c.role}</div>
+                                <div className="opacity-60">—{c.token}</div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+            {/* In-context demo — каждый новый цвет в живой роли */}
+            <div>
+                <Label>Расширенная — в контексте</Label>
+                <div className="grid grid-cols-12 gap-6">
+
+                    {/* SLATE — ночной Холл */}
+                    <div className="col-span-12 md:col-span-6 bg-[color:var(--color-slate)] text-paper p-10 flex flex-col justify-between min-h-[260px]">
+                        <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.22em] text-[10px] opacity-70">
+                            slate · ночной Холл
+                        </div>
+                        <div>
+                            <h4 className="font-[family-name:var(--font-display)] italic text-3xl md:text-4xl leading-[1.05] mb-3">
+                                Камерный ужин на 14 персон
+                            </h4>
+                            <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.2em] text-[10px] opacity-65">
+                                19:30 · 27 апреля · исторический зал
+                            </div>
                         </div>
                     </div>
-                    <div className="flex justify-between items-end font-[family-name:var(--font-ui)] uppercase tracking-[0.18em] text-[10px]">
-                        <span className="opacity-80 max-w-[60%]">{c.role}</span>
-                        <span className="opacity-60">—{c.token}</span>
+
+                    {/* STONE — ambient card */}
+                    <div className="col-span-12 md:col-span-6 bg-[color:var(--color-stone)] text-ink p-10 flex flex-col justify-between min-h-[260px]">
+                        <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.22em] text-[10px] opacity-70">
+                            stone · ambient surface
+                        </div>
+                        <div>
+                            <h4 className="font-[family-name:var(--font-display)] text-3xl md:text-4xl leading-[1.05] mb-3">
+                                FAQ — ответы на 8 вопросов
+                            </h4>
+                            <div className="font-[family-name:var(--font-body)] text-sm opacity-75 leading-relaxed">
+                                Ранний заезд, парковка, дети, животные, тихие номера — всё по полочкам.
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* BRICK — серьёзный CTA в тёмной секции */}
+                    <div className="col-span-12 md:col-span-7 bg-ink text-paper p-10 flex items-center justify-between gap-6 flex-wrap">
+                        <div>
+                            <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.22em] text-[10px] opacity-65 mb-3">
+                                brick · CTA в ink-контексте
+                            </div>
+                            <h4 className="font-[family-name:var(--font-display)] text-3xl md:text-4xl leading-[1.05] max-w-md">
+                                Корпоративный договор
+                            </h4>
+                        </div>
+                        <button className="font-[family-name:var(--font-ui)] uppercase tracking-[0.18em] text-xs px-8 py-4 bg-[color:var(--color-brick)] text-paper hover:opacity-85 transition-opacity">
+                            Оставить заявку
+                        </button>
+                    </div>
+
+                    {/* CORAL — announcement плашка */}
+                    <div className="col-span-12 md:col-span-5 bg-[color:var(--color-coral)] text-paper p-6 flex items-center justify-between gap-4">
+                        <div className="flex items-center gap-4">
+                            <div className="w-8 h-8 border border-paper/50 flex items-center justify-center font-[family-name:var(--font-ui)] text-[10px] tnum">%</div>
+                            <div>
+                                <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.18em] text-[10px] opacity-80 mb-1">
+                                    coral · announcement
+                                </div>
+                                <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.14em] text-xs">
+                                    Промокод LETYAGIN
+                                </div>
+                            </div>
+                        </div>
+                        <button aria-label="Закрыть" className="font-[family-name:var(--font-ui)] text-xl opacity-70 hover:opacity-100">×</button>
+                    </div>
+
+                    {/* SAGE — surface в Дусе */}
+                    <div className="col-span-12 bg-[color:var(--color-sage)] text-ink p-10 md:p-14">
+                        <div className="grid grid-cols-12 gap-6 items-center">
+                            <div className="col-span-12 md:col-span-6">
+                                <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.22em] text-[10px] opacity-70 mb-4">
+                                    sage · карточка-ингредиент в Дусе
+                                </div>
+                                <h4 className="font-[family-name:var(--font-display)] text-4xl md:text-5xl leading-[1] mb-4">
+                                    Белые грузди<br /><span className="italic">из&nbsp;Мордовии</span>
+                                </h4>
+                                <p className="font-[family-name:var(--font-body)] text-base opacity-85 leading-relaxed max-w-md">
+                                    В Дусе — собственная засолка на рассоле с укропом и корнем хрена. Базовая позиция завтраков и холодных закусок.
+                                </p>
+                            </div>
+                            <div className="col-span-12 md:col-span-5 md:col-start-8 flex gap-3 flex-wrap">
+                                {['Грузди', 'Укроп', 'Хрен', 'Чёрный хлеб', 'Сметана'].map((t) => (
+                                    <span key={t} className="font-[family-name:var(--font-ui)] uppercase tracking-[0.16em] text-[10px] px-4 py-2 border border-ink/30">
+                                        {t}
+                                    </span>
+                                ))}
+                            </div>
+                        </div>
                     </div>
                 </div>
-            ))}
+            </div>
         </div>
     );
 }
