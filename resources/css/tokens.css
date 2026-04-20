@@ -1,0 +1,37 @@
+/* =============================================================================
+ * Отель Летягинъ — токены дизайн-системы (Tailwind 4 @theme)
+ *
+ * PLACEHOLDER. Будет заменён после утверждения брифа и дизайн-системы.
+ * Пока — нейтральная sepia-палитра старого отеля, чтобы каркас жил.
+ *
+ * Токены здесь автоматически превращаются в Tailwind utilities:
+ *   --color-paper  → bg-paper, text-paper, border-paper
+ *   --font-serif   → font-serif
+ *   --duration-slow → duration-slow
+ * ========================================================================== */
+
+@theme {
+  /* --- Цвета --- */
+  --color-paper:        #f5efe3;   /* основной фон — старая бумага */
+  --color-ink:          #1c1815;   /* основной текст — глубокий коричневый */
+  --color-sepia:        #8a6a3b;   /* акцент — золотистая сепия */
+  --color-sepia-deep:   #5c4422;   /* тёмная сепия для hover/активных */
+  --color-cream:        #ebe1cd;   /* светлая сепия для секций */
+  --color-line:         #c9ba9c;   /* цвет линий и разделителей */
+  --color-error:        #a83d2b;   /* ошибки форм */
+
+  /* --- Шрифты (placeholder — заменим по брифу) --- */
+  --font-serif: 'Georgia', 'Times New Roman', serif;
+  --font-sans:  -apple-system, 'Helvetica Neue', Arial, sans-serif;
+
+  /* --- Моушн --- */
+  --duration-quick:    180ms;
+  --duration-standard: 320ms;
+  --duration-slow:     560ms;
+  --ease-standard:  cubic-bezier(0.2, 0.6, 0.2, 1);
+  --ease-editorial: cubic-bezier(0.22, 0.61, 0.36, 1);
+
+  /* --- Радиусы (минимальные, в духе исторического дома) --- */
+  --radius-sm: 2px;
+  --radius-md: 4px;
+}
