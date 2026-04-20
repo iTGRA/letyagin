@@ -251,6 +251,8 @@ function Palette() {
         { name: 'Coral',  hex: '#CB5041', token: 'coral',  role: 'friendly — тэги, announcement',    onDark: true,  bg: '#CB5041' },
         { name: 'Sage',   hex: '#899370', token: 'sage',   role: 'светлый moss — surface Дуси',      onDark: true,  bg: '#899370' },
         { name: 'Stone',  hex: '#A39A8C', token: 'stone',  role: 'нейтральный warm — ambient',       onDark: true,  bg: '#A39A8C' },
+        { name: 'Coal',   hex: '#1A1817', token: 'coal',   role: 'near-black — Swiss-типографика',   onDark: true,  bg: '#1A1817' },
+        { name: 'Bone',   hex: '#F1ECE3', token: 'bone',   role: 'neutral ivory — фон отзывов',      onDark: false, bg: '#F1ECE3' },
     ];
 
     return (
@@ -282,10 +284,10 @@ function Palette() {
                 </div>
             </div>
 
-            {/* Extended palette — 5 swatches, row-of-5 on lg, 3+2 on md, 2+2+1 on mobile */}
+            {/* Extended palette — 7 swatches, row-of-7 on xl, 4+3 on md, 2+2+2+1 on mobile */}
             <div>
-                <Label>Расширенная · 5 новых точечных токенов</Label>
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-px bg-ink/15">
+                <Label>Расширенная · 7 точечных токенов (5 цветов + 2 value-якоря)</Label>
+                <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-7 gap-px bg-ink/15">
                     {extended.map((c) => (
                         <div
                             key={c.token}
@@ -396,6 +398,60 @@ function Palette() {
                                     </span>
                                 ))}
                             </div>
+                        </div>
+                    </div>
+
+                    {/* COAL — Swiss newsprint-hero */}
+                    <div className="col-span-12 bg-[color:var(--color-coal)] text-paper p-10 md:p-16">
+                        <div className="grid grid-cols-12 gap-6">
+                            <div className="col-span-12 md:col-span-2">
+                                <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.22em] text-[10px] opacity-55">
+                                    coal · newsprint
+                                </div>
+                            </div>
+                            <div className="col-span-12 md:col-span-8">
+                                <div className="font-[family-name:var(--font-display)] text-[clamp(2.5rem,7vw,6rem)] leading-[0.9] tracking-[-0.015em] mb-6">
+                                    Обычный день<br />
+                                    <span className="italic opacity-75">в купеческой Самаре</span>
+                                </div>
+                                <p className="font-[family-name:var(--font-body)] text-base md:text-lg leading-[1.55] opacity-80 max-w-2xl">
+                                    В 1883 году на месте особняка стоял постоялый двор. Через дорогу торговали с Нижегородской ярмаркой, в лавках покупали калачи, а в банях Челышева отдыхала после дороги купеческая молодёжь.
+                                </p>
+                            </div>
+                            <div className="col-span-12 md:col-span-2 md:text-right self-end">
+                                <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.2em] text-[10px] opacity-55 tnum">
+                                    1883<br />
+                                    <span className="opacity-70">Самара</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* BONE — карточка отзыва (нейтральный фон без тёплого оттенка) */}
+                    <div className="col-span-12 md:col-span-6 bg-[color:var(--color-bone)] text-ink p-10 min-h-[280px] flex flex-col">
+                        <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.22em] text-[10px] opacity-55 mb-6">
+                            bone · отзыв · neutral surface
+                        </div>
+                        <blockquote className="font-[family-name:var(--font-display)] text-2xl md:text-3xl italic leading-[1.25] mb-auto">
+                            «Номер был не просто чист — он был вылизан. Идеально чистое бельё, четыре подушки и мягкий халат».
+                        </blockquote>
+                        <div className="flex justify-between items-center pt-6 border-t border-ink/15 mt-6 font-[family-name:var(--font-ui)] uppercase tracking-[0.2em] text-[10px]">
+                            <span className="opacity-70">Анастасия</span>
+                            <span className="text-rust">★★★★★</span>
+                        </div>
+                    </div>
+
+                    {/* BONE — сравнение: та же карточка на surface, чтобы показать разницу */}
+                    <div className="col-span-12 md:col-span-6 bg-surface text-ink p-10 min-h-[280px] flex flex-col">
+                        <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.22em] text-[10px] opacity-55 mb-6">
+                            surface · та же карточка для сравнения
+                        </div>
+                        <blockquote className="font-[family-name:var(--font-display)] text-2xl md:text-3xl italic leading-[1.25] mb-auto">
+                            «Номер был не просто чист — он был вылизан. Идеально чистое бельё, четыре подушки и мягкий халат».
+                        </blockquote>
+                        <div className="flex justify-between items-center pt-6 border-t border-ink/15 mt-6 font-[family-name:var(--font-ui)] uppercase tracking-[0.2em] text-[10px]">
+                            <span className="opacity-70">Анастасия</span>
+                            <span className="text-rust">★★★★★</span>
                         </div>
                     </div>
                 </div>
