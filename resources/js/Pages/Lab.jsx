@@ -84,6 +84,22 @@ export default function Lab() {
                     <Badges />
                 </Section>
 
+                <Divider />
+
+                <Section number="14" title="Медиа-кластер" caption="Мульти-фото спред в стиле ресторанной редакции">
+                    <MediaCluster />
+                </Section>
+
+                {/* 15 — full-bleed spec page (brick) */}
+                <SpecPage />
+
+                {/* 16 — architecture frame (ink + full-bleed photo) */}
+                <ArchitectureFrame />
+
+                <Section number="17" title="Lifestyle-спред" caption="Сплит H1 с кластером фото" bleedTop>
+                    <LifestyleSpread />
+                </Section>
+
                 <FooterBar />
             </main>
         </>
@@ -127,8 +143,8 @@ function FooterBar() {
                 <div className="col-span-6 md:col-span-3 md:col-start-9">
                     <Label onDark>Меты</Label>
                     <dl className="space-y-3 font-[family-name:var(--font-ui)] uppercase tracking-[0.14em] text-[11px]">
-                        <Meta k="секций" v="13" />
-                        <Meta k="цветов" v="9" />
+                        <Meta k="секций" v="17" />
+                        <Meta k="цветов" v="13" />
                         <Meta k="шрифтов" v="3" />
                         <Meta k="фаза" v="2A" />
                     </dl>
@@ -146,7 +162,7 @@ function Section({ number, title, caption, children }) {
                 <header className="grid grid-cols-12 gap-6 mb-16 md:mb-24">
                     <div className="col-span-12 md:col-span-2">
                         <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.28em] text-[11px] tnum opacity-50">
-                            {number}/13
+                            {number}/17
                         </div>
                     </div>
                     <div className="col-span-12 md:col-span-7">
@@ -620,7 +636,7 @@ function RestaurantPreview() {
                 <div className="grid grid-cols-12 gap-6 mb-14">
                     <div className="col-span-12 md:col-span-2">
                         <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.28em] text-[11px] opacity-60 tnum">
-                            05/13
+                            05/17
                         </div>
                     </div>
                     <div className="col-span-12 md:col-span-8">
@@ -697,7 +713,7 @@ function HallPreview() {
                 <div className="grid grid-cols-12 gap-6 mb-14">
                     <div className="col-span-12 md:col-span-2">
                         <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.28em] text-[11px] opacity-60 tnum">
-                            06/13
+                            06/17
                         </div>
                     </div>
                     <div className="col-span-12 md:col-span-8">
@@ -1005,7 +1021,7 @@ function CinematicInk() {
                 <div className="grid grid-cols-12 gap-6">
                     <div className="col-span-12 md:col-span-2">
                         <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.28em] text-[11px] opacity-50 tnum">
-                            12/13
+                            12/17
                         </div>
                     </div>
                     <div className="col-span-12 md:col-span-8">
@@ -1068,6 +1084,254 @@ function Badges() {
                             <div className="font-[family-name:var(--font-body)] text-sm opacity-55">{f.bot}</div>
                         </div>
                     ))}
+                </div>
+            </div>
+        </div>
+    );
+}
+
+/* =============================================================================
+ * 14. Media cluster — мульти-фото спред (Restaurant editorial style)
+ *
+ * Паттерн как на референсе «Authentic italian flavours»:
+ * крупный главный кадр слева, связка мелких кадров + 2-колонные тексты справа,
+ * массивный H1 снизу-слева.
+ * ========================================================================== */
+
+function MediaCluster() {
+    return (
+        <div className="bg-[color:var(--color-bone)] -mx-6 md:-mx-12 px-6 md:px-16 py-16 md:py-24">
+            <div className="grid grid-cols-12 gap-6 md:gap-8">
+                {/* Главный кадр слева */}
+                <div className="col-span-12 md:col-span-6 lg:col-span-5 row-span-2 order-1">
+                    <Placeholder className="aspect-[4/5] md:aspect-[5/6] lg:aspect-[4/5]" label="накрытый стол — сверху" />
+                </div>
+
+                {/* Мелкий портрет верх-центр */}
+                <div className="col-span-4 md:col-span-2 lg:col-span-2 md:col-start-7 lg:col-start-6 order-2">
+                    <Placeholder className="aspect-[3/4]" label="портрет шефа" />
+                </div>
+
+                {/* Бар — описание правее портрета */}
+                <div className="col-span-8 md:col-span-4 lg:col-span-4 order-3 flex flex-col">
+                    <div className="font-[family-name:var(--font-display)] text-2xl md:text-3xl mb-3">
+                        Бар
+                    </div>
+                    <p className="font-[family-name:var(--font-body)] text-sm md:text-base leading-[1.55] opacity-80 max-w-xs">
+                        Авторские настойки на сосновой шишке, кедровом орехе, чёрной смородине. Каждая — история одного лета в саду Самарской области.
+                    </p>
+                </div>
+
+                {/* Ресторан — текст + маленькое фото */}
+                <div className="col-span-12 md:col-span-6 lg:col-span-4 md:col-start-7 lg:col-start-6 order-5 md:order-4">
+                    <div className="flex gap-5 items-start">
+                        <div className="w-28 md:w-36 shrink-0">
+                            <Placeholder className="aspect-[4/5]" label="блюдо" />
+                        </div>
+                        <div>
+                            <div className="font-[family-name:var(--font-display)] text-2xl md:text-3xl mb-3">
+                                Ресторан
+                            </div>
+                            <p className="font-[family-name:var(--font-body)] text-sm leading-[1.55] opacity-80 mb-5">
+                                Завтраки с 8:00, когда все закрыто. Ланч 12–16. Вечером — подовый хлеб, груздь, рассольник.
+                            </p>
+                            <a href="#" className="font-[family-name:var(--font-display)] italic text-base underline underline-offset-4 decoration-ink/40 hover:decoration-ink">
+                                Забронировать стол →
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Массивный H1 снизу-слева под главным фото */}
+                <div className="col-span-12 md:col-span-8 lg:col-span-8 lg:col-start-1 order-4 md:order-5 mt-6 md:mt-16">
+                    <h3 className="font-[family-name:var(--font-display)] text-[clamp(2.5rem,7vw,6rem)] leading-[0.95] tracking-[-0.01em]">
+                        Подлинные<br />
+                        <span className="italic">самарские</span> вкусы
+                    </h3>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+/* =============================================================================
+ * 15. Spec page — full-bleed brick с spec-таблицей
+ *
+ * Паттерн как на референсе «Rustic charm meets modern comfort»:
+ * большой H1 слева, таблица фактов справа, пилюля-CTA снизу.
+ * ========================================================================== */
+
+function SpecPage() {
+    return (
+        <section className="w-full bg-[color:var(--color-brick)] text-paper">
+            <div className="max-w-[1440px] mx-auto px-6 md:px-12 py-24 md:py-36">
+                <div className="grid grid-cols-12 gap-6 mb-20">
+                    <div className="col-span-12 md:col-span-2">
+                        <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.28em] text-[11px] opacity-65 tnum">
+                            15/17
+                        </div>
+                    </div>
+                    <div className="col-span-12 md:col-span-7">
+                        <h2 className="font-[family-name:var(--font-display)] text-5xl md:text-7xl leading-[0.95]">
+                            Spec-страница
+                        </h2>
+                    </div>
+                    <div className="col-span-12 md:col-span-3 md:text-right self-end">
+                        <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.2em] text-[10px] opacity-75">
+                            Full-bleed · brick<br />для страницы номера
+                        </div>
+                    </div>
+                </div>
+
+                {/* Верх: H1 слева + таблица справа */}
+                <div className="grid grid-cols-12 gap-6 mb-24">
+                    <div className="col-span-12 md:col-span-7">
+                        <h3 className="font-[family-name:var(--font-display)] text-[clamp(2.5rem,7vw,6rem)] leading-[0.95] tracking-[-0.01em] mb-8">
+                            История<br />
+                            встречает<br />
+                            <span className="italic">современный комфорт</span>
+                        </h3>
+                        <p className="font-[family-name:var(--font-body)] text-base md:text-lg leading-[1.6] opacity-85 max-w-lg">
+                            ЛетягинЪ Люкс — двухкомнатный номер в отдельном корпусе с собственным выходом во внутренний двор. Кирпичная кладка — из материалов самого И.&nbsp;П. Летягина.
+                        </p>
+                    </div>
+
+                    <div className="col-span-12 md:col-span-5">
+                        <dl className="divide-y divide-paper/20 font-[family-name:var(--font-ui)] uppercase tracking-[0.14em] text-xs">
+                            {[
+                                ['Метраж',         '50 м²'],
+                                ['Гостей',         '2 + 1 раскладной'],
+                                ['Вид',            'Двор, крыши'],
+                                ['Завтрак',        'Включён · 8:00–11:00'],
+                                ['Кондиционер',    'Да'],
+                                ['Wi-Fi',          '200 Мбит/с'],
+                                ['Парковка',       'Охраняемая · бесплатно'],
+                                ['Доступная среда','Да'],
+                            ].map(([k, v]) => (
+                                <div key={k} className="flex justify-between py-3">
+                                    <dt className="opacity-65">{k}</dt>
+                                    <dd className="tnum">{v}</dd>
+                                </div>
+                            ))}
+                        </dl>
+                    </div>
+                </div>
+
+                {/* Низ: маленькое фото слева + pill-CTA справа */}
+                <div className="grid grid-cols-12 gap-6 items-end">
+                    <div className="col-span-6 md:col-span-4">
+                        <Placeholder className="aspect-[4/3] bg-paper/5 border-paper/20" label="интерьер номера" />
+                    </div>
+                    <div className="col-span-6 md:col-span-8 flex justify-end">
+                        <button className="font-[family-name:var(--font-ui)] uppercase tracking-[0.18em] text-xs px-10 py-4 rounded-full border border-paper/50 hover:bg-paper hover:text-[color:var(--color-brick)] transition-colors">
+                            Проверить наличие
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
+}
+
+/* =============================================================================
+ * 16. Architecture frame — italic quote + full-bleed city photo
+ *
+ * Паттерн как на референсе «Wake up to stunning views of Milan's skyline»:
+ * italic serif центровая цитата слева, архитектурное фото справа full-bleed,
+ * блок контакта/адреса снизу слева.
+ * ========================================================================== */
+
+function ArchitectureFrame() {
+    return (
+        <section className="w-full bg-[color:var(--color-brick)] text-paper">
+            <div className="max-w-[1440px] mx-auto">
+                <div className="grid grid-cols-12 gap-0">
+                    {/* Левая половина — цитата */}
+                    <div className="col-span-12 md:col-span-5 p-8 md:p-14 lg:p-20 flex flex-col justify-between min-h-[500px] md:min-h-[720px]">
+                        <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.28em] text-[11px] opacity-65 tnum">
+                            16/17
+                        </div>
+
+                        <div className="py-16">
+                            <blockquote className="font-[family-name:var(--font-display)] italic text-[clamp(1.5rem,3vw,2.5rem)] leading-[1.3] text-center">
+                                Проснитесь в&nbsp;номере с&nbsp;видом на&nbsp;двор, где&nbsp;под&nbsp;акациями подают завтрак, а&nbsp;в&nbsp;10 минутах пешком — площадь Куйбышева и&nbsp;Волга.
+                            </blockquote>
+                        </div>
+
+                        <div>
+                            <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.22em] text-[10px] opacity-75 mb-2">
+                                Адрес
+                            </div>
+                            <address className="font-[family-name:var(--font-body)] text-sm not-italic opacity-85 leading-relaxed">
+                                443020, Самара<br />
+                                ул. Самарская, 69<br />
+                                +7 987 979-00-00
+                            </address>
+                        </div>
+                    </div>
+
+                    {/* Правая половина — архитектурное фото */}
+                    <div className="col-span-12 md:col-span-7">
+                        <Placeholder
+                            className="aspect-[4/5] md:aspect-auto md:h-full bg-paper/5 border-0"
+                            label="городская перспектива — ленинградская"
+                        />
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
+}
+
+/* =============================================================================
+ * 17. Lifestyle spread — split H1 + photo cluster
+ *
+ * Паттерн как на референсе «Rooftop views, refined service»:
+ * 3 фото разных размеров сверху, центровая italic-цитата, крупный
+ * split-H1 слева/справа внизу.
+ * ========================================================================== */
+
+function LifestyleSpread() {
+    return (
+        <div className="bg-[color:var(--color-bone)] -mx-6 md:-mx-12 px-6 md:px-16 py-20 md:py-28">
+            {/* Top: 3 фото */}
+            <div className="grid grid-cols-12 gap-6 md:gap-8 mb-16 md:mb-20">
+                <div className="col-span-12 md:col-span-5">
+                    <Placeholder className="aspect-[5/4]" label="пара на террасе во дворе" />
+                </div>
+                <div className="col-span-4 md:col-span-2 md:pt-10">
+                    <Placeholder className="aspect-square" label="деталь — подушки" />
+                </div>
+                <div className="col-span-8 md:col-span-5">
+                    <Placeholder className="aspect-[5/4]" label="ванная с видом" />
+                </div>
+            </div>
+
+            {/* Middle: центровая italic quote */}
+            <div className="grid grid-cols-12 gap-6 mb-16 md:mb-24">
+                <div className="col-span-12 md:col-span-8 md:col-start-3">
+                    <blockquote className="font-[family-name:var(--font-display)] italic text-center text-[clamp(1.25rem,2.5vw,1.75rem)] leading-[1.5] text-ink/85">
+                        Медная чайная в&nbsp;номере, собственный ключ от&nbsp;внутреннего двора, завтрак с&nbsp;подовым хлебом — мелочи, ради которых возвращаются.
+                    </blockquote>
+                    <div className="text-center mt-8">
+                        <a href="#" className="font-[family-name:var(--font-ui)] uppercase tracking-[0.2em] text-[11px] text-rust hover:underline underline-offset-4">
+                            Посмотреть номера →
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            {/* Bottom: split H1 */}
+            <div className="grid grid-cols-12 gap-6 items-end">
+                <div className="col-span-12 md:col-span-6">
+                    <h3 className="font-[family-name:var(--font-display)] text-[clamp(2.5rem,8vw,7rem)] leading-[0.9] tracking-[-0.015em]">
+                        Виды<br />на&nbsp;Волгу,
+                    </h3>
+                </div>
+                <div className="col-span-12 md:col-span-6 md:text-right">
+                    <h3 className="font-[family-name:var(--font-display)] text-[clamp(2.5rem,8vw,7rem)] leading-[0.9] tracking-[-0.015em] italic opacity-85">
+                        качество сервиса.
+                    </h3>
                 </div>
             </div>
         </div>
