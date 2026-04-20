@@ -100,6 +100,31 @@ export default function Lab() {
                     <LifestyleSpread />
                 </Section>
 
+                {/* 18 — full-bleed moss chapter cover */}
+                <ChapterCover />
+
+                <Section number="19" title="Ценности в ряд" caption="4 фото-образа + 2-колонный текст (FRUTTA core values)">
+                    <ValuesRow />
+                </Section>
+
+                <Divider />
+
+                <Section number="20" title="Mood-board" caption="Асимметричный фото-кластер для атмосферы">
+                    <MoodBoard />
+                </Section>
+
+                <Divider />
+
+                <Section number="21" title="Микс-плашки" caption="Два голоса в одной композиции — moss и surface zigzag">
+                    <MixPlates />
+                </Section>
+
+                <Divider />
+
+                <Section number="22" title="4-колонный реестр" caption="Перечисление услуг/шагов в Swiss-стиле">
+                    <ColumnsRegistry />
+                </Section>
+
                 <FooterBar />
             </main>
         </>
@@ -143,7 +168,7 @@ function FooterBar() {
                 <div className="col-span-6 md:col-span-3 md:col-start-9">
                     <Label onDark>Меты</Label>
                     <dl className="space-y-3 font-[family-name:var(--font-ui)] uppercase tracking-[0.14em] text-[11px]">
-                        <Meta k="секций" v="17" />
+                        <Meta k="секций" v="22" />
                         <Meta k="цветов" v="13" />
                         <Meta k="шрифтов" v="3" />
                         <Meta k="фаза" v="2A" />
@@ -162,7 +187,7 @@ function Section({ number, title, caption, children }) {
                 <header className="grid grid-cols-12 gap-6 mb-16 md:mb-24">
                     <div className="col-span-12 md:col-span-2">
                         <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.28em] text-[11px] tnum opacity-50">
-                            {number}/17
+                            {number}/22
                         </div>
                     </div>
                     <div className="col-span-12 md:col-span-7">
@@ -636,7 +661,7 @@ function RestaurantPreview() {
                 <div className="grid grid-cols-12 gap-6 mb-14">
                     <div className="col-span-12 md:col-span-2">
                         <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.28em] text-[11px] opacity-60 tnum">
-                            05/17
+                            05/22
                         </div>
                     </div>
                     <div className="col-span-12 md:col-span-8">
@@ -713,7 +738,7 @@ function HallPreview() {
                 <div className="grid grid-cols-12 gap-6 mb-14">
                     <div className="col-span-12 md:col-span-2">
                         <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.28em] text-[11px] opacity-60 tnum">
-                            06/17
+                            06/22
                         </div>
                     </div>
                     <div className="col-span-12 md:col-span-8">
@@ -1021,7 +1046,7 @@ function CinematicInk() {
                 <div className="grid grid-cols-12 gap-6">
                     <div className="col-span-12 md:col-span-2">
                         <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.28em] text-[11px] opacity-50 tnum">
-                            12/17
+                            12/22
                         </div>
                     </div>
                     <div className="col-span-12 md:col-span-8">
@@ -1168,7 +1193,7 @@ function SpecPage() {
                 <div className="grid grid-cols-12 gap-6 mb-20">
                     <div className="col-span-12 md:col-span-2">
                         <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.28em] text-[11px] opacity-65 tnum">
-                            15/17
+                            15/22
                         </div>
                     </div>
                     <div className="col-span-12 md:col-span-7">
@@ -1249,7 +1274,7 @@ function ArchitectureFrame() {
                     {/* Левая половина — цитата */}
                     <div className="col-span-12 md:col-span-5 p-8 md:p-14 lg:p-20 flex flex-col justify-between min-h-[500px] md:min-h-[720px]">
                         <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.28em] text-[11px] opacity-65 tnum">
-                            16/17
+                            16/22
                         </div>
 
                         <div className="py-16">
@@ -1333,6 +1358,270 @@ function LifestyleSpread() {
                         качество сервиса.
                     </h3>
                 </div>
+            </div>
+        </div>
+    );
+}
+
+/* =============================================================================
+ * 18. Chapter cover — editorial full-bleed moss
+ *
+ * Паттерн как на FRUTTA «OUR Brand»: большой italic H1 вверху-слева,
+ * маленький интро-параграф справа, атмосферное фото в центре, italic-
+ * цитата внизу-слева. Для открытия /about и будущих brand-book разделов.
+ * ========================================================================== */
+
+function ChapterCover() {
+    return (
+        <section className="w-full bg-moss text-paper">
+            <div className="max-w-[1440px] mx-auto px-6 md:px-12 py-24 md:py-36">
+                {/* Top meta row */}
+                <div className="grid grid-cols-12 gap-6 mb-20 md:mb-28 items-start">
+                    <div className="col-span-4 md:col-span-2 font-[family-name:var(--font-ui)] uppercase tracking-[0.28em] text-[10px] opacity-70 tnum">
+                        18/22
+                    </div>
+                    <div className="col-span-4 md:col-span-4 md:col-start-5 text-center font-[family-name:var(--font-ui)] uppercase tracking-[0.28em] text-[10px] opacity-70">
+                        ЛетягинЪ · дизайн-книга
+                    </div>
+                    <div className="col-span-4 md:col-span-3 md:col-start-10 text-right font-[family-name:var(--font-ui)] uppercase tracking-[0.28em] text-[10px] opacity-70">
+                        Раздел 01 · бренд
+                    </div>
+                </div>
+
+                {/* Main composition */}
+                <div className="grid grid-cols-12 gap-6 md:gap-8">
+                    <div className="col-span-12 md:col-span-7">
+                        <h3 className="font-[family-name:var(--font-display)] text-[clamp(4rem,13vw,12rem)] leading-[0.9] tracking-[-0.02em]">
+                            Наш <span className="italic">дом</span>
+                        </h3>
+                    </div>
+                    <div className="col-span-12 md:col-span-5 md:pt-16">
+                        <p className="font-[family-name:var(--font-body)] text-base md:text-lg leading-[1.65] opacity-90">
+                            Раздел описывает, что такое бутик-отель ЛетягинЪ сегодня — как мы понимаем гостеприимство, чем живём и что обещаем.
+                        </p>
+                        <p className="font-[family-name:var(--font-body)] text-base md:text-lg leading-[1.65] opacity-80 mt-4">
+                            Это про внимание, а&nbsp;не&nbsp;про количество.
+                        </p>
+                    </div>
+
+                    {/* Photo + quote row */}
+                    <div className="col-span-12 md:col-span-5 mt-10 md:mt-20">
+                        <Placeholder className="aspect-[4/5] bg-paper/10 border-paper/20" label="деталь — рука с ключом" />
+                    </div>
+
+                    <div className="col-span-12 md:col-span-6 md:col-start-7 self-end md:pt-20">
+                        <blockquote className="font-[family-name:var(--font-display)] italic text-2xl md:text-3xl leading-[1.35] max-w-lg">
+                            «Бутик-отель — это не про 19 номеров. Это про то, что&nbsp;в&nbsp;каждом из&nbsp;них мы знаем гостя по&nbsp;имени.»
+                        </blockquote>
+                        <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.2em] text-[10px] mt-6 opacity-60">
+                            Из выступления основателя · 2024
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
+}
+
+/* =============================================================================
+ * 19. Values row — 4 образа + 2-колонный текст (FRUTTA brand core values)
+ *
+ * Сверху 4 маленьких фото с UI-метками-ценностями, снизу 2-колонный текст
+ * про философию отеля. Для /about или блока «Ценности».
+ * ========================================================================== */
+
+function ValuesRow() {
+    const values = [
+        { img: 'накрытие', label: 'сервис',   sub: 'каждая мелочь' },
+        { img: 'кирпич',   label: 'материал', sub: 'подлинность' },
+        { img: 'повар',    label: 'вкус',     sub: 'авторская кухня' },
+        { img: 'вид',      label: 'место',    sub: 'центр пешком' },
+    ];
+    return (
+        <div className="space-y-14 md:space-y-20">
+            {/* 4 фото в ряд с капшенами */}
+            <div className="grid grid-cols-12 gap-4 md:gap-6">
+                {values.map((v) => (
+                    <div key={v.label} className="col-span-6 md:col-span-3">
+                        <Placeholder className="aspect-square mb-4" label={v.img} />
+                        <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.22em] text-[10px] text-rust mb-1">
+                            {v.label}
+                        </div>
+                        <div className="font-[family-name:var(--font-body)] text-sm opacity-70">
+                            {v.sub}
+                        </div>
+                    </div>
+                ))}
+            </div>
+
+            {/* 2-колонный манифест + sidenote */}
+            <div className="grid grid-cols-12 gap-6 md:gap-10">
+                <div className="col-span-12 md:col-span-3">
+                    <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.22em] text-[10px] opacity-60 mb-3">
+                        Четыре ценности
+                    </div>
+                    <h3 className="font-[family-name:var(--font-display)] text-3xl md:text-4xl leading-[1.1]">
+                        Что <span className="italic">нами</span> движет
+                    </h3>
+                </div>
+                <div className="col-span-12 md:col-span-5">
+                    <p className="font-[family-name:var(--font-body)] text-base md:text-lg leading-[1.65] opacity-90 mb-5">
+                        Мы верим, что бутик-отель делают не стены и не мебель — его делает внимание. К тому, как накрыт завтрак. К тому, что за кладкой XIX века. К тому, чем пахнет лестница после дождя.
+                    </p>
+                    <p className="font-[family-name:var(--font-body)] text-base md:text-lg leading-[1.65] opacity-80">
+                        Эти четыре ценности — не маркетинговые слоганы. Это то, что видно в каждом решении: от&nbsp;выбора кирпича для реставрации до&nbsp;способа заваривания кофе.
+                    </p>
+                </div>
+                <div className="col-span-12 md:col-span-3 md:col-start-10 border-l border-ink/25 pl-5 md:pt-4">
+                    <p className="font-[family-name:var(--font-display)] italic text-lg leading-[1.4] opacity-80">
+                        «Мелочь — это не мелочь, если она повторяется каждый день.»
+                    </p>
+                    <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.2em] text-[10px] mt-4 opacity-55">
+                        Внутренний кодекс отеля
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+/* =============================================================================
+ * 20. Mood-board — асимметричный фото-кластер
+ *
+ * Paper фон, слева описание (4 col), справа 8 col с 6-7 фотографиями
+ * разных аспектов и размеров. Для галерей, atmosphere-секций, teaser'ов.
+ * ========================================================================== */
+
+function MoodBoard() {
+    return (
+        <div className="grid grid-cols-12 gap-6 md:gap-8">
+            {/* Левая колонка — описание */}
+            <div className="col-span-12 md:col-span-4">
+                <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.22em] text-[10px] opacity-55 mb-4">
+                    Mood-board
+                </div>
+                <h3 className="font-[family-name:var(--font-display)] text-4xl md:text-5xl leading-[1.05] mb-6">
+                    Атмосфера<br /><span className="italic">как она&nbsp;есть</span>
+                </h3>
+                <p className="font-[family-name:var(--font-body)] text-base leading-[1.6] opacity-80 mb-4 max-w-sm">
+                    Живые фрагменты — без постановки. Утренний свет на кирпичной кладке, чашка на столике, гость у окна, медная ручка двери — детали, из которых складывается тон места.
+                </p>
+                <a href="#" className="font-[family-name:var(--font-display)] italic underline underline-offset-4 decoration-ink/50 text-base">
+                    Смотреть полную галерею →
+                </a>
+            </div>
+
+            {/* Правая часть — фото-кластер */}
+            <div className="col-span-12 md:col-span-8 grid grid-cols-6 gap-3 md:gap-4 auto-rows-[120px] md:auto-rows-[140px]">
+                <Placeholder className="col-span-3 row-span-2" label="интерьер" />
+                <Placeholder className="col-span-3 row-span-1" label="ручка двери" />
+                <Placeholder className="col-span-2 row-span-1" label="завтрак" />
+                <Placeholder className="col-span-4 row-span-2" label="коридор" />
+                <Placeholder className="col-span-2 row-span-1" label="окно" />
+                <Placeholder className="col-span-3 row-span-1" label="цветы на столе" />
+                <Placeholder className="col-span-3 row-span-1" label="кладка крупно" />
+            </div>
+        </div>
+    );
+}
+
+/* =============================================================================
+ * 21. Mix plates — два голоса в одной композиции (FRUTTA «Our mission»)
+ *
+ * Левая плашка: moss с фото вверху + текст внизу.
+ * Правая плашка: surface с текстом вверху + фото внизу.
+ * Показывает Отель ↔ Дуся как одно целое из двух контрастов.
+ * ========================================================================== */
+
+function MixPlates() {
+    return (
+        <div className="grid grid-cols-12 gap-0">
+            {/* Левая плашка — moss */}
+            <div className="col-span-12 md:col-span-6 bg-moss text-paper flex flex-col">
+                <div className="aspect-[4/3] md:aspect-[5/4]">
+                    <Placeholder className="w-full h-full bg-paper/5 border-paper/20" label="грядка на террасе" />
+                </div>
+                <div className="p-8 md:p-12 flex flex-col gap-5">
+                    <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.22em] text-[10px] opacity-70">
+                        вселенная Дуси
+                    </div>
+                    <h3 className="font-[family-name:var(--font-display)] text-3xl md:text-4xl leading-[1.05]">
+                        От&nbsp;травы<br /><span className="italic">до&nbsp;тарелки</span>
+                    </h3>
+                    <p className="font-[family-name:var(--font-body)] text-base leading-[1.6] opacity-85 max-w-md">
+                        Зелень — с террасы во внутреннем дворе. Хлеб подовый — из печи на кухне. Настойки — из трав, которые растут за окном.
+                    </p>
+                </div>
+            </div>
+
+            {/* Правая плашка — surface */}
+            <div className="col-span-12 md:col-span-6 bg-surface text-ink flex flex-col">
+                <div className="p-8 md:p-12 flex flex-col gap-5 flex-1">
+                    <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.22em] text-[10px] opacity-60">
+                        вселенная отеля
+                    </div>
+                    <h3 className="font-[family-name:var(--font-display)] text-3xl md:text-4xl leading-[1.05]">
+                        От&nbsp;двора<br /><span className="italic">до&nbsp;номера</span>
+                    </h3>
+                    <p className="font-[family-name:var(--font-body)] text-base leading-[1.6] opacity-85 max-w-md">
+                        Кирпич с клеймом Летягина в стене вашего номера. Медь в ванной — с Колыванского завода. Окна XIX века сохранили переплёты.
+                    </p>
+                </div>
+                <div className="aspect-[4/3] md:aspect-[5/4]">
+                    <Placeholder className="w-full h-full" label="интерьер с медью" />
+                </div>
+            </div>
+        </div>
+    );
+}
+
+/* =============================================================================
+ * 22. 4-column registry — Swiss «Next Steps» style
+ *
+ * Каждая колонка: маленькая нумерация + UI-метка + короткий headline +
+ * 2-3 строки описания. Для перечисления услуг, шагов процесса, FAQ-тизеров.
+ * ========================================================================== */
+
+function ColumnsRegistry() {
+    const items = [
+        { n: '01', label: 'Бронирование',     title: 'Прямо на сайте',         body: 'Через виджет Контур.Отеля, с промокодом LETYAGIN — скидка, которой нет на агрегаторах.' },
+        { n: '02', label: 'Встреча',           title: 'Персональный ключ',      body: 'Ресепшн круглосуточно, заезд без очереди. По предварительному запросу — трансфер от вокзала.' },
+        { n: '03', label: 'Проживание',        title: 'Удобства без счётчика',  body: 'Wi-Fi 200 Мбит/с, охраняемая парковка, прачечная, ранний заезд — включены в стоимость.' },
+        { n: '04', label: 'Ресторан',          title: '«Дуся» — в пути',        body: 'Завтраки с 8:00 (обычно — до 11:00). Ужины — новая русская, 62 посадки. Вином занимается шеф лично.' },
+    ];
+    return (
+        <div>
+            <div className="grid grid-cols-12 gap-6 mb-16">
+                <div className="col-span-12 md:col-span-5">
+                    <h3 className="font-[family-name:var(--font-display)] text-4xl md:text-5xl leading-[1.05]">
+                        Как всё <span className="italic">устроено</span>
+                    </h3>
+                </div>
+                <div className="col-span-12 md:col-span-6 md:col-start-7">
+                    <p className="font-[family-name:var(--font-body)] text-base leading-[1.6] opacity-75 max-w-md">
+                        Четыре шага, за которые отвечает команда отеля — от момента, как вы нашли нас в Яндексе, до утреннего кофе.
+                    </p>
+                </div>
+            </div>
+
+            {/* 4 колонки */}
+            <div className="grid grid-cols-12 gap-6 md:gap-8 border-t border-ink/25 pt-8">
+                {items.map((it) => (
+                    <div key={it.n} className="col-span-12 md:col-span-3 flex flex-col">
+                        <div className="font-[family-name:var(--font-display)] text-5xl md:text-6xl text-rust leading-none tnum mb-5">
+                            {it.n}
+                        </div>
+                        <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.22em] text-[10px] opacity-60 mb-3">
+                            {it.label}
+                        </div>
+                        <h4 className="font-[family-name:var(--font-display)] text-2xl leading-[1.1] mb-3">
+                            {it.title}
+                        </h4>
+                        <p className="font-[family-name:var(--font-body)] text-sm leading-[1.55] opacity-80">
+                            {it.body}
+                        </p>
+                    </div>
+                ))}
             </div>
         </div>
     );
