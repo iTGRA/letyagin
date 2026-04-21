@@ -6,46 +6,49 @@ use App\Models\Review;
 use Illuminate\Database\Seeder;
 
 /**
- * Живые цитаты из AUDIT.md §3.3 — реальные отзывы гостей на Яндексе.
+ * 4 канонических отзыва из CONTENT.md §2 Блок 13 + бонус из AUDIT.
+ * Эти — утверждены клиентом как избранные для главной.
  */
 class ReviewsSeeder extends Seeder
 {
     public function run(): void
     {
+        Review::query()->delete();
+
         $reviews = [
             [
-                'author_name' => 'Анастасия',
-                'source' => 'yandex',
+                'author_name' => 'Светлана',
+                'source' => 'twogis',
                 'rating' => 5,
-                'text' => 'Номер был не просто чист, он был вылизан. Идеально чистое постельное бельё, 4 подушки и очень мягкий халат.',
+                'text' => 'Номер был не просто чист — он был вылизан. Идеально чистое постельное бельё, 4 подушки и очень мягкий халат. В номере есть красивые фужеры, были приятно удивлены.',
                 'topic' => 'service',
                 'posted_at' => '2025-11-12',
                 'is_featured' => true,
             ],
             [
                 'author_name' => 'Татьяна Бондаренко',
-                'source' => 'yandex',
+                'source' => 'twogis',
                 'rating' => 5,
-                'text' => 'Администраторы замечательные! Не первый раз приезжаю в Самару и останавливаюсь только здесь!',
-                'topic' => 'service',
+                'text' => 'Прекрасный отель! Администраторы замечательные! Не первый раз приезжаю в Самару и останавливаюсь только здесь!',
+                'topic' => 'feeling',
                 'posted_at' => '2025-10-28',
                 'is_featured' => true,
             ],
             [
-                'author_name' => 'Мария',
-                'source' => 'yandex',
+                'author_name' => 'Лб',
+                'source' => 'twogis',
                 'rating' => 5,
-                'text' => 'Очень нравятся завтраки и ужины в ресторане Дуся. Очень вкусно и душевно.',
+                'text' => 'Номера чистые и уютные, классный интерьер, а завтраки просто чудесные! 👌🏼 Свежие, вкусные, красивые блюда! В общем, всё на высшем! Теперь проезжая Самару я точно знаю где остановлюсь!',
                 'topic' => 'breakfast',
                 'posted_at' => '2025-09-17',
                 'is_featured' => true,
             ],
             [
-                'author_name' => 'Иван П.',
-                'source' => 'yandex',
+                'author_name' => '«Как Есть»',
+                'source' => 'manual',
                 'rating' => 5,
-                'text' => 'Теперь, проезжая Самару, я точно знаю, где остановлюсь!',
-                'topic' => 'feeling',
+                'text' => 'Здесь подают то, что давно забыли: грузди, драники, рассольник, тончайшее сало и домашние пирожки. Завтраки с 8:00, когда все ещё закрыто.',
+                'topic' => 'breakfast',
                 'posted_at' => '2025-08-22',
                 'is_featured' => true,
             ],
@@ -65,33 +68,12 @@ class ReviewsSeeder extends Seeder
                 'text' => 'Прекрасный отель! Внимание к мелочам подкупает особенно. Локация — лучше быть не может.',
                 'topic' => 'feeling',
                 'posted_at' => '2025-06-03',
-                'is_featured' => true,
-            ],
-            [
-                'author_name' => 'Сергей',
-                'source' => 'twogis',
-                'rating' => 5,
-                'text' => 'Начну с основного, отель приятно удивил! До пешеходной улицы пройти всего через сквер.',
-                'topic' => 'location',
-                'posted_at' => '2025-05-14',
                 'is_featured' => false,
-            ],
-            [
-                'author_name' => 'Евгения',
-                'source' => 'yandex',
-                'rating' => 5,
-                'text' => 'Очень понравился отель, 5+! Начиная с ресепшена, милые девушки встретили с улыбкой, очень вежливые и приветливые.',
-                'topic' => 'service',
-                'posted_at' => '2025-04-18',
-                'is_featured' => true,
             ],
         ];
 
         foreach ($reviews as $i => $r) {
-            Review::updateOrCreate(
-                ['author_name' => $r['author_name'], 'posted_at' => $r['posted_at']],
-                array_merge($r, ['is_active' => true, 'sort_order' => $i]),
-            );
+            Review::create(array_merge($r, ['is_active' => true, 'sort_order' => $i]));
         }
     }
 }

@@ -34,8 +34,8 @@ class CacheCleaner
         \App\Models\Review::class           => ['reviews.featured', 'reviews.active'],
         \App\Models\Faq::class              => ['faqs.active'],
         \App\Models\HistoryMilestone::class => ['history.active'],
-        \App\Models\Announcement::class     => ['announcement.current', 'inertia.shared'],
-        \App\Models\Popup::class            => ['popup.current', 'inertia.shared'],
+        \App\Models\Announcement::class     => ['announcement.shared', 'inertia.shared'],
+        \App\Models\Popup::class            => ['popup.shared', 'inertia.shared'],
         \App\Models\Page::class             => ['page.by_slug', 'inertia.shared'],
     ];
 
