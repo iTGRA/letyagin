@@ -185,6 +185,28 @@ storage и bootstrap/cache. Войдёт в deploy-скрипт.
 
 **Инцидент-триггер:** 2026-04-20, тот же rsync что и L1.
 
+### L3. После deploy / migrate:fresh — перепубликовать Orchid assets
+
+```bash
+php artisan vendor:publish --tag=laravel-assets --force
+```
+
+**Почему:** Orchid хранит свою статику (`mix-manifest.json`, CSS/JS, favicon)
+в `public/vendor/orchid/`. Файлы копируются через composer post-install
+hook (`@php artisan vendor:publish --tag=laravel-assets`). Если deploy
+идёт через `composer dump-autoload` без полного `composer install`
+(как у нас — чтобы не переустанавливать vendor на каждый пуш), хук
+не срабатывает, и при первом заходе в админку — 500:
+`Mix manifest not found at public/vendor/orchid/mix-manifest.json`.
+
+**Симптом:** /admin/login → 500, в логе `Illuminate\View\ViewException:
+Mix manifest not found`. Главная `/` работает.
+
+**Как применять:** включить `vendor:publish --tag=laravel-assets --force`
+в deploy-скрипт после `package:discover` и перед рестартом сервисов.
+
+**Инцидент-триггер:** 2026-04-21, deploy Фазы 2B-5.
+
 ---
 
 ## Инфраструктура
