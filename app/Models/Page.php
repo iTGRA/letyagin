@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Orchid\Attachment\Attachable;
+use App\Concerns\ResolvesAttachment;
 use Orchid\Screen\AsSource;
 
 /**
@@ -15,6 +16,7 @@ class Page extends Model
 {
     use Attachable;
     use AsSource;
+    use ResolvesAttachment;
 
     public const SLUGS = [
         '' => 'Главная',
@@ -54,5 +56,11 @@ class Page extends Model
     public function getRouteKeyName(): string
     {
         return 'slug';
+    }
+    protected $appends = ['og_image_url'];
+
+    public function getOgImageUrlAttribute(): ?string
+    {
+        return $this->resolveAttachmentUrl($this->og_image_id);
     }
 }

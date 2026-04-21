@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use App\Concerns\ResolvesAttachment;
 use Orchid\Attachment\Attachable;
 use Orchid\Screen\AsSource;
 
@@ -15,6 +16,7 @@ class HeroSlide extends Model
 {
     use Attachable;
     use AsSource;
+    use ResolvesAttachment;
 
     protected $fillable = [
         'image_id', 'video_url', 'title', 'subtitle',
@@ -25,6 +27,13 @@ class HeroSlide extends Model
         'is_active' => 'boolean',
         'sort_order' => 'integer',
     ];
+
+    protected $appends = ['image_url'];
+
+    public function getImageUrlAttribute(): ?string
+    {
+        return $this->resolveAttachmentUrl($this->image_id);
+    }
 
     public function scopeActive(Builder $q): Builder
     {

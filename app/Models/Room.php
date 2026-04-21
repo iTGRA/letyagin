@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Concerns\ResolvesAttachment;
 use Orchid\Attachment\Attachable;
 use Orchid\Screen\AsSource;
 
@@ -17,6 +18,7 @@ class Room extends Model
 {
     use Attachable;
     use AsSource;
+    use ResolvesAttachment;
 
     protected $fillable = [
         'slug', 'name', 'category', 'area_m2', 'guests', 'extra_bed',
@@ -35,6 +37,13 @@ class Room extends Model
         'guests' => 'integer',
         'sort_order' => 'integer',
     ];
+
+    protected $appends = ['hero_image_url'];
+
+    public function getHeroImageUrlAttribute(): ?string
+    {
+        return $this->resolveAttachmentUrl($this->hero_image_id);
+    }
 
     /** Перечисление категорий (валидируется на уровне FormRequest и Orchid). */
     public const CATEGORIES = [

@@ -11,6 +11,7 @@
 import { Head, Link } from '@inertiajs/react';
 import Layout from '@/Components/Layout/Layout';
 import { Placeholder, SectionHeader, Section, InlineDivider } from '@/Components/UI/Primitives';
+import Img from '@/Components/UI/Img';
 import KonturWidgetStub from '@/Components/Blocks/KonturWidgetStub';
 
 export default function Home(props) {
@@ -58,7 +59,12 @@ export default function Home(props) {
                     </div>
 
                     <div className="col-span-12 md:col-span-6 order-1 md:order-2">
-                        <Placeholder className="aspect-[4/5] md:aspect-[4/5] md:max-h-[calc(100vh-160px)]" label="фасад особняка" />
+                        <Img
+                            src={props.heroSlides?.[0]?.image_url}
+                            alt="Бутик-отель ЛетягинЪ"
+                            label="фасад особняка"
+                            className="aspect-[4/5] md:aspect-[4/5] md:max-h-[calc(100vh-160px)]"
+                        />
                     </div>
                 </div>
             </section>
@@ -109,7 +115,12 @@ export default function Home(props) {
                             href={`/rooms/${r.slug}`}
                             className={`${i === 0 ? 'col-span-12 md:col-span-6' : 'col-span-6 md:col-span-3'} group`}
                         >
-                            <Placeholder className={`mb-4 ${i === 0 ? 'aspect-[4/3]' : 'aspect-[3/4]'}`} label={r.name.toLowerCase()} />
+                            <Img
+                                src={r.hero_image_url}
+                                alt={r.name}
+                                label={r.name.toLowerCase()}
+                                className={`mb-4 ${i === 0 ? 'aspect-[4/3]' : 'aspect-[3/4]'}`}
+                            />
                             <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.18em] text-[10px] text-moss mb-2 tnum">
                                 {r.area_m2} м² · до {r.guests} гостя
                             </div>

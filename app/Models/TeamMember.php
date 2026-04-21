@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Orchid\Attachment\Attachable;
+use App\Concerns\ResolvesAttachment;
 use Orchid\Screen\AsSource;
 
 /**
@@ -15,6 +16,7 @@ class TeamMember extends Model
 {
     use Attachable;
     use AsSource;
+    use ResolvesAttachment;
 
     protected $fillable = [
         'name', 'role', 'slug', 'bio', 'photo_id', 'facts',
@@ -36,5 +38,11 @@ class TeamMember extends Model
     public function scopeFeatured(Builder $q): Builder
     {
         return $q->where('is_featured', true)->where('is_active', true);
+    }
+    protected $appends = ['photo_url'];
+
+    public function getPhotoUrlAttribute(): ?string
+    {
+        return $this->resolveAttachmentUrl($this->photo_id);
     }
 }

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Orchid\Attachment\Attachable;
+use App\Concerns\ResolvesAttachment;
 use Orchid\Screen\AsSource;
 
 /**
@@ -15,6 +16,7 @@ class HistoryMilestone extends Model
 {
     use Attachable;
     use AsSource;
+    use ResolvesAttachment;
 
     protected $fillable = [
         'year_label', 'headline', 'body', 'image_id',
@@ -29,5 +31,11 @@ class HistoryMilestone extends Model
     public function scopeActive(Builder $q): Builder
     {
         return $q->where('is_active', true)->orderBy('sort_order');
+    }
+    protected $appends = ['image_url'];
+
+    public function getImageUrlAttribute(): ?string
+    {
+        return $this->resolveAttachmentUrl($this->image_id);
     }
 }

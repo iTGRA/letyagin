@@ -1,6 +1,7 @@
 import { Head, Link } from '@inertiajs/react';
 import Layout from '@/Components/Layout/Layout';
-import { Placeholder, Section, SectionHeader, PrimaryBtn, MetaPair } from '@/Components/UI/Primitives';
+import { Section, SectionHeader, PrimaryBtn, MetaPair } from '@/Components/UI/Primitives';
+import Img from '@/Components/UI/Img';
 import KonturWidgetStub from '@/Components/Blocks/KonturWidgetStub';
 
 export default function RoomShow({ room, similarRooms = [] }) {
@@ -41,7 +42,7 @@ export default function RoomShow({ room, similarRooms = [] }) {
 
             {/* Hero-фото */}
             <Section bg="paper">
-                <Placeholder className="aspect-[16/9] md:aspect-[21/9]" label="главное фото номера" />
+                <Img src={room.hero_image_url} alt={room.name} label="главное фото номера" className="aspect-[16/9] md:aspect-[21/9]" />
             </Section>
 
             {/* Описание */}
@@ -110,7 +111,7 @@ export default function RoomShow({ room, similarRooms = [] }) {
                     <div className="grid grid-cols-12 gap-6">
                         {similarRooms.map((r) => (
                             <Link key={r.id} href={`/rooms/${r.slug}`} className="col-span-12 md:col-span-4 group">
-                                <Placeholder className="aspect-[4/3] mb-3" label={r.name.toLowerCase()} />
+                                <Img src={r.hero_image_url} alt={r.name} label={r.name.toLowerCase()} className="aspect-[4/3] mb-3" />
                                 <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.18em] text-[10px] text-moss tnum mb-1">
                                     {r.area_m2} м²
                                 </div>

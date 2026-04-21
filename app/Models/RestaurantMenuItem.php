@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Orchid\Attachment\Attachable;
+use App\Concerns\ResolvesAttachment;
 use Orchid\Screen\AsSource;
 
 /**
@@ -15,6 +16,7 @@ class RestaurantMenuItem extends Model
 {
     use Attachable;
     use AsSource;
+    use ResolvesAttachment;
 
     protected $fillable = [
         'name', 'category', 'description', 'price_hint', 'image_id',
@@ -46,5 +48,11 @@ class RestaurantMenuItem extends Model
     {
         return $q->where('is_featured', true)->where('is_available', true)
             ->orderBy('sort_order');
+    }
+    protected $appends = ['image_url'];
+
+    public function getImageUrlAttribute(): ?string
+    {
+        return $this->resolveAttachmentUrl($this->image_id);
     }
 }

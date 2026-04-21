@@ -1,6 +1,7 @@
 import { Head, Link } from '@inertiajs/react';
 import Layout from '@/Components/Layout/Layout';
-import { Placeholder, Section, SectionHeader } from '@/Components/UI/Primitives';
+import { Section, SectionHeader } from '@/Components/UI/Primitives';
+import Img from '@/Components/UI/Img';
 import KonturWidgetStub from '@/Components/Blocks/KonturWidgetStub';
 
 export default function RoomsIndex({ page, rooms = [] }) {
@@ -21,7 +22,7 @@ export default function RoomsIndex({ page, rooms = [] }) {
                             href={`/rooms/${r.slug}`}
                             className="col-span-12 md:col-span-6 lg:col-span-4 bg-surface p-5 hover:shadow-[0_8px_24px_rgba(58,27,28,0.08)] transition-shadow group"
                         >
-                            <Placeholder className="aspect-[4/3] mb-4" label={r.name.toLowerCase()} />
+                            <Img src={r.hero_image_url} alt={r.name} label={r.name.toLowerCase()} className="aspect-[4/3] mb-4" />
                             <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.18em] text-[10px] text-moss mb-2 tnum">
                                 {r.area_m2} м² · до {r.guests} {pluralGuests(r.guests)}
                             </div>

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Orchid\Attachment\Attachable;
+use App\Concerns\ResolvesAttachment;
 use Orchid\Screen\AsSource;
 
 /**
@@ -14,6 +15,7 @@ class Popup extends Model
 {
     use Attachable;
     use AsSource;
+    use ResolvesAttachment;
 
     public const SINGLETON_ID = 1;
 
@@ -62,5 +64,11 @@ class Popup extends Model
         }
 
         return true;
+    }
+    protected $appends = ['image_url'];
+
+    public function getImageUrlAttribute(): ?string
+    {
+        return $this->resolveAttachmentUrl($this->image_id);
     }
 }

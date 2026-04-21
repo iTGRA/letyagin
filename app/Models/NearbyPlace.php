@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Orchid\Attachment\Attachable;
+use App\Concerns\ResolvesAttachment;
 use Orchid\Screen\AsSource;
 
 /**
@@ -15,6 +16,7 @@ class NearbyPlace extends Model
 {
     use Attachable;
     use AsSource;
+    use ResolvesAttachment;
 
     protected $fillable = [
         'slug', 'name', 'category', 'description', 'image_id',
@@ -48,5 +50,11 @@ class NearbyPlace extends Model
     public function scopeByCategory(Builder $q, string $cat): Builder
     {
         return $q->where('category', $cat);
+    }
+    protected $appends = ['image_url'];
+
+    public function getImageUrlAttribute(): ?string
+    {
+        return $this->resolveAttachmentUrl($this->image_id);
     }
 }
