@@ -61,8 +61,6 @@ class DashboardScreen extends Screen
                 'Новых — корп-тариф'       => 'metrics.new_corporate',
                 'Новых — обратная связь'   => 'metrics.new_contact',
             ]),
-
-            Layout::view('platform::dummy'),
         ];
     }
 }

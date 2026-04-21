@@ -27,30 +27,30 @@ export default function Home(props) {
 
             {/* ─── BLOCK 01 · HERO ──────────────────────────────── */}
             <section className="bg-paper text-ink">
-                <div className="max-w-[1440px] mx-auto px-6 md:px-12 pt-12 md:pt-20 pb-10 grid grid-cols-12 gap-6 md:gap-10 items-end">
+                <div className="max-w-[1440px] mx-auto px-6 md:px-12 py-10 md:py-14 grid grid-cols-12 gap-6 md:gap-10 items-center md:min-h-[calc(100vh-80px)]">
                     <div className="col-span-12 md:col-span-6 order-2 md:order-1">
                         <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.22em] text-[11px] text-rust mb-5">
                             Бутик-отель · 12 категорий · 19 номеров
                         </div>
-                        <h1 className="font-[family-name:var(--font-display)] text-[clamp(2.75rem,7vw,7rem)] leading-[0.95] tracking-[-0.015em] mb-8">
+                        <h1 className="font-[family-name:var(--font-display)] text-[clamp(1.875rem,3.3vw,3.25rem)] leading-[1.08] tracking-[-0.005em] mb-6 md:mb-8 [text-wrap:balance] max-w-[580px]">
                             {page?.h1 || 'Летягин. Бутик-отель в центре Самары'}
                         </h1>
-                        <p className="font-[family-name:var(--font-body)] text-lg md:text-xl leading-[1.5] opacity-90 max-w-xl mb-10">
+                        <p className="font-[family-name:var(--font-body)] text-base md:text-lg leading-[1.5] opacity-90 max-w-xl mb-8">
                             {e.hero_subtitle || ''}
                         </p>
 
                         {/* Шильдики */}
-                        <div className="flex flex-wrap gap-4">
-                            <div className="inline-flex items-center gap-4 bg-ink text-paper px-5 py-3">
-                                <div className="font-[family-name:var(--font-display)] text-3xl leading-none tnum">5.0</div>
-                                <div className="h-8 w-px bg-paper/30" />
-                                <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.18em] text-[10px] leading-[1.5]">
+                        <div className="flex flex-wrap gap-3">
+                            <div className="inline-flex items-center gap-4 bg-ink text-paper px-4 py-2.5">
+                                <div className="font-[family-name:var(--font-display)] text-2xl leading-none tnum">5.0</div>
+                                <div className="h-7 w-px bg-paper/30" />
+                                <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.18em] text-[10px] leading-[1.4]">
                                     298 отзывов<br />Яндекс
                                 </div>
                             </div>
-                            <div className="inline-flex items-center gap-3 border border-ink/40 px-5 py-3">
-                                <span className="text-rust text-lg">🏛</span>
-                                <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.18em] text-[10px] leading-[1.5]">
+                            <div className="inline-flex items-center gap-3 border border-ink/40 px-4 py-2.5">
+                                <span className="text-rust text-base">🏛</span>
+                                <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.18em] text-[10px] leading-[1.4]">
                                     Хорошее место<br />отметка Яндекса
                                 </div>
                             </div>
@@ -58,7 +58,7 @@ export default function Home(props) {
                     </div>
 
                     <div className="col-span-12 md:col-span-6 order-1 md:order-2">
-                        <Placeholder className="aspect-[4/5] md:aspect-[5/6]" label="фасад особняка" />
+                        <Placeholder className="aspect-[4/5] md:aspect-[4/5] md:max-h-[calc(100vh-160px)]" label="фасад особняка" />
                     </div>
                 </div>
             </section>
