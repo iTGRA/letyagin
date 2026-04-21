@@ -94,6 +94,58 @@
 }
 
 /* -----------------------------------------------------------------------------
+ * Sticky transparent header — тон адаптируется к hero-цвету страницы
+ *
+ *   .letyagin-header              — общий базовый класс
+ *   --on-light                    — страница со светлым hero (surface/paper/stone/bone)
+ *   --on-dark                     — страница с тёмным hero (sage/slate/moss/ink/brick/coral)
+ *   --scrolled                    — прокрутили > 40px, фон залит paper всегда
+ *
+ * Состояния:
+ *   default      → bg transparent, text зависит от тона
+ *   :hover       → bg paper, text ink (на обоих тонах)
+ *   scrolled     → bg paper, text ink
+ *
+ * На мобиле hover не применяется (touch), но скролл работает как на десктопе.
+ * -------------------------------------------------------------------------- */
+
+.letyagin-header {
+  background: transparent;
+}
+
+.letyagin-header--on-light,
+.letyagin-header--on-light .letyagin-header__link {
+  color: var(--color-ink);
+}
+
+.letyagin-header--on-dark,
+.letyagin-header--on-dark .letyagin-header__link {
+  color: var(--color-paper);
+}
+
+.letyagin-header--on-light:hover,
+.letyagin-header--on-dark:hover,
+.letyagin-header--scrolled {
+  background: color-mix(in srgb, var(--color-paper) 95%, transparent);
+  -webkit-backdrop-filter: saturate(120%) blur(8px);
+  backdrop-filter: saturate(120%) blur(8px);
+  border-bottom: 1px solid color-mix(in srgb, var(--color-ink) 10%, transparent);
+}
+
+.letyagin-header--on-light:hover,
+.letyagin-header--on-light:hover .letyagin-header__link,
+.letyagin-header--on-dark:hover,
+.letyagin-header--on-dark:hover .letyagin-header__link,
+.letyagin-header--scrolled,
+.letyagin-header--scrolled .letyagin-header__link {
+  color: var(--color-ink);
+}
+
+.letyagin-header__link:hover {
+  color: var(--color-rust);
+}
+
+/* -----------------------------------------------------------------------------
  * prefers-reduced-motion — обязательное отключение всего
  * -------------------------------------------------------------------------- */
 

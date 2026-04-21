@@ -5,7 +5,7 @@ import LeadForm from '@/Components/UI/LeadForm';
 
 export default function Corporate({ page }) {
     return (
-        <Layout>
+        <Layout heroTone="light">
             <Head>
                 <title>{page?.meta_title}</title>
                 <meta name="description" content={page?.meta_description || ''} />
@@ -13,7 +13,7 @@ export default function Corporate({ page }) {
 
             {/* Hero — stone (нейтральный warm для делового блока) */}
             <section className="bg-[color:var(--color-stone)] text-ink">
-                <div className="max-w-[1440px] mx-auto px-6 md:px-12 py-20 md:py-28">
+                <div className="max-w-[1440px] mx-auto px-6 md:px-12 pt-32 md:pt-40 pb-20 md:pb-28">
                     <div className="grid grid-cols-12 gap-6">
                         <div className="col-span-12 md:col-span-8">
                             <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.22em] text-[10px] opacity-70 mb-5">

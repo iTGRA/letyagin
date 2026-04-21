@@ -13,30 +13,31 @@ const CAT_LABELS = {
 
 export default function Nearby({ page, places = [], placesByCategory = {} }) {
     return (
-        <Layout>
+        <Layout heroTone="dark">
             <Head>
                 <title>{page?.meta_title}</title>
                 <meta name="description" content={page?.meta_description || ''} />
             </Head>
 
-            <section className="bg-paper text-ink">
-                <div className="max-w-[1440px] mx-auto px-6 md:px-12 py-20 md:py-28">
+            {/* Hero coral — friendly, warm для путеводителя */}
+            <section className="bg-[color:var(--color-coral)] text-paper">
+                <div className="max-w-[1440px] mx-auto px-6 md:px-12 pt-32 md:pt-40 pb-16 md:pb-20">
                     <div className="grid grid-cols-12 gap-6 mb-10">
                         <div className="col-span-12 md:col-span-8">
-                            <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.22em] text-[10px] text-rust mb-5">
+                            <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.24em] text-[10px] opacity-80 mb-5">
                                 Путеводитель от отеля
                             </div>
-                            <h1 className="font-[family-name:var(--font-display)] text-[clamp(2.5rem,7vw,6rem)] leading-[0.95] mb-6">
-                                Самара в пешей доступности
+                            <h1 className="font-[family-name:var(--font-display)] text-[clamp(2.25rem,5.5vw,5rem)] leading-[1] tracking-[-0.01em] mb-6 [text-wrap:balance] max-w-[780px]">
+                                Самара в&nbsp;пешей доступности
                             </h1>
-                            <p className="font-[family-name:var(--font-body)] text-lg leading-[1.5] opacity-85 max-w-2xl">
+                            <p className="font-[family-name:var(--font-body)] text-base md:text-lg leading-[1.55] opacity-90 max-w-2xl">
                                 {page?.intro_text}
                             </p>
                         </div>
                     </div>
 
-                    {/* Карта-плейсхолдер */}
-                    <Placeholder className="aspect-[16/7]" label="интерактивная карта Яндекс" />
+                    {/* Карта-плейсхолдер на coral — чуть темнее тоном */}
+                    <Placeholder className="aspect-[16/7] bg-paper/10 border-paper/20" label="интерактивная карта Яндекс" />
                 </div>
             </section>
 

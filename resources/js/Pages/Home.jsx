@@ -20,15 +20,15 @@ export default function Home(props) {
     const e = page?.extra ?? {};
 
     return (
-        <Layout>
+        <Layout heroTone="light">
             <Head>
                 <title>{page?.meta_title || 'Бутик-отель ЛетягинЪ'}</title>
                 <meta name="description" content={page?.meta_description || ''} />
             </Head>
 
-            {/* ─── BLOCK 01 · HERO ──────────────────────────────── */}
-            <section className="bg-paper text-ink">
-                <div className="max-w-[1440px] mx-auto px-6 md:px-12 py-10 md:py-14 grid grid-cols-12 gap-6 md:gap-10 items-center md:min-h-[calc(100vh-80px)]">
+            {/* ─── BLOCK 01 · HERO (surface — светлее paper, отделяется от body) ──── */}
+            <section className="bg-surface text-ink">
+                <div className="max-w-[1440px] mx-auto px-6 md:px-12 pt-24 md:pt-32 pb-14 md:pb-20 grid grid-cols-12 gap-6 md:gap-10 items-center md:min-h-screen">
                     <div className="col-span-12 md:col-span-6 order-2 md:order-1">
                         <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.22em] text-[11px] text-rust mb-5">
                             Бутик-отель · 12 категорий · 19 номеров
@@ -71,7 +71,7 @@ export default function Home(props) {
 
             {/* ─── BLOCK 02 · WIDGET (hero) ─────────────────────── */}
             <section className="bg-paper text-ink" id="widget-hero">
-                <div className="max-w-[1440px] mx-auto px-6 md:px-12 pb-10">
+                <div className="max-w-[1440px] mx-auto px-6 md:px-12 pt-10 md:pt-14 pb-10">
                     <KonturWidgetStub source="hero-widget" />
                 </div>
             </section>

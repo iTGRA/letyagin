@@ -6,15 +6,34 @@ import KonturWidgetStub from '@/Components/Blocks/KonturWidgetStub';
 
 export default function RoomsIndex({ page, rooms = [] }) {
     return (
-        <Layout>
+        <Layout heroTone="dark">
             <Head>
                 <title>{page?.meta_title || 'Номера — Летягин'}</title>
                 <meta name="description" content={page?.meta_description || ''} />
             </Head>
 
-            <Section bg="paper">
-                <SectionHeader title={page?.h1 || 'Номера'} caption={page?.intro_text || ''} />
+            {/* Hero — sage. Отделяется от paper body цветом. */}
+            <section className="bg-[color:var(--color-sage)] text-paper">
+                <div className="max-w-[1440px] mx-auto px-6 md:px-12 pt-32 md:pt-40 pb-20 md:pb-28">
+                    <div className="grid grid-cols-12 gap-6">
+                        <div className="col-span-12 md:col-span-2">
+                            <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.24em] text-[10px] opacity-70">
+                                12 категорий
+                            </div>
+                        </div>
+                        <div className="col-span-12 md:col-span-8">
+                            <h1 className="font-[family-name:var(--font-display)] text-[clamp(2.25rem,5vw,4.5rem)] leading-[1] tracking-[-0.01em] mb-6 [text-wrap:balance] max-w-[700px]">
+                                {page?.h1 || 'Номера бутик-отеля Летягин'}
+                            </h1>
+                            <p className="font-[family-name:var(--font-body)] text-base md:text-lg leading-[1.5] opacity-90 max-w-2xl">
+                                {page?.intro_text || ''}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
+            <Section bg="paper">
                 <div className="grid grid-cols-12 gap-6">
                     {rooms.map((r) => (
                         <Link

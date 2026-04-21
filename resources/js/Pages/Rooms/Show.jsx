@@ -6,7 +6,7 @@ import KonturWidgetStub from '@/Components/Blocks/KonturWidgetStub';
 
 export default function RoomShow({ room, similarRooms = [] }) {
     return (
-        <Layout>
+        <Layout heroTone="dark">
             <Head>
                 <title>{room.seo_title || room.name}</title>
                 <meta name="description" content={room.seo_description || ''} />
@@ -14,7 +14,7 @@ export default function RoomShow({ room, similarRooms = [] }) {
 
             {/* HERO номера — brick плашка по правилу DESIGN_SYSTEM */}
             <section className="bg-[color:var(--color-brick)] text-paper">
-                <div className="max-w-[1440px] mx-auto px-6 md:px-12 py-20 md:py-28">
+                <div className="max-w-[1440px] mx-auto px-6 md:px-12 pt-32 md:pt-40 pb-20 md:pb-28">
                     <div className="grid grid-cols-12 gap-6 md:gap-10 items-end">
                         <div className="col-span-12 md:col-span-7">
                             <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.2em] text-[11px] opacity-65 mb-4">

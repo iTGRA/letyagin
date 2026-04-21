@@ -6,7 +6,7 @@ import LeadForm from '@/Components/UI/LeadForm';
 export default function Restaurant({ page, chef, menuHeadliners = [], menuByCategory = {} }) {
     const e = page?.extra ?? {};
     return (
-        <Layout>
+        <Layout heroTone="dark">
             <Head>
                 <title>{page?.meta_title || 'Ресторан Дуся'}</title>
                 <meta name="description" content={page?.meta_description || ''} />
@@ -14,7 +14,7 @@ export default function Restaurant({ page, chef, menuHeadliners = [], menuByCate
 
             {/* Hero moss */}
             <section className="bg-moss text-paper">
-                <div className="max-w-[1440px] mx-auto px-6 md:px-12 py-20 md:py-28">
+                <div className="max-w-[1440px] mx-auto px-6 md:px-12 pt-32 md:pt-40 pb-20 md:pb-28">
                     <div className="grid grid-cols-12 gap-6 items-end">
                         <div className="col-span-12 md:col-span-7">
                             <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.22em] text-[10px] opacity-70 mb-5">

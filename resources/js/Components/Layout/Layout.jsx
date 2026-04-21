@@ -9,7 +9,7 @@ import { Link, usePage } from '@inertiajs/react';
 import Header from './Header';
 import Footer from './Footer';
 
-export default function Layout({ children }) {
+export default function Layout({ children, heroTone = 'light' }) {
     const { announcement, flash } = usePage().props;
     const [toast, setToast] = useState(null);
 
@@ -32,9 +32,10 @@ export default function Layout({ children }) {
             {/* Announcement bar (optional) */}
             {announcement && <Announcement {...announcement} />}
 
-            <Header />
+            <Header heroTone={heroTone} />
 
-            <main className="flex-1">{children}</main>
+            {/* Отрицательный отступ — hero начинается под прозрачным хедером */}
+            <main className="flex-1 -mt-16 md:-mt-20">{children}</main>
 
             <Footer />
 

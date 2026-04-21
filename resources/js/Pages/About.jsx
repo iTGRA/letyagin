@@ -4,28 +4,28 @@ import { Placeholder, Section, SectionHeader } from '@/Components/UI/Primitives'
 
 export default function About({ page, milestones = [] }) {
     return (
-        <Layout>
+        <Layout heroTone="dark">
             <Head>
                 <title>{page?.meta_title}</title>
                 <meta name="description" content={page?.meta_description || ''} />
             </Head>
 
-            {/* Hero paper + фасад */}
-            <section className="bg-paper text-ink">
-                <div className="max-w-[1440px] mx-auto px-6 md:px-12 py-20 md:py-28 grid grid-cols-12 gap-6 items-end">
-                    <div className="col-span-12 md:col-span-6">
-                        <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.22em] text-[10px] text-rust mb-5">
+            {/* Hero slate — ночной, характер исторической главы */}
+            <section className="bg-[color:var(--color-slate)] text-paper">
+                <div className="max-w-[1440px] mx-auto px-6 md:px-12 pt-32 md:pt-40 pb-20 md:pb-28 grid grid-cols-12 gap-6 items-end">
+                    <div className="col-span-12 md:col-span-7">
+                        <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.24em] text-[10px] opacity-70 mb-5">
                             1874 — 2024 · 150 лет гостеприимства
                         </div>
-                        <h1 className="font-[family-name:var(--font-display)] text-[clamp(2.5rem,7vw,6rem)] leading-[0.95] mb-6">
+                        <h1 className="font-[family-name:var(--font-display)] text-[clamp(2.25rem,5.5vw,5rem)] leading-[1] tracking-[-0.01em] mb-6 [text-wrap:balance] max-w-[780px]">
                             История особняка на&nbsp;Самарской,&nbsp;69
                         </h1>
-                        <p className="font-[family-name:var(--font-body)] text-lg leading-[1.5] opacity-85 max-w-xl">
+                        <p className="font-[family-name:var(--font-body)] text-base md:text-lg leading-[1.55] opacity-85 max-w-xl">
                             {page?.intro_text}
                         </p>
                     </div>
-                    <div className="col-span-12 md:col-span-6">
-                        <Placeholder className="aspect-[4/5] md:aspect-[5/6]" label="фасад особняка" />
+                    <div className="col-span-12 md:col-span-5">
+                        <Placeholder className="aspect-[4/5] md:aspect-[5/6] bg-paper/5 border-paper/20" label="фасад особняка" />
                     </div>
                 </div>
             </section>

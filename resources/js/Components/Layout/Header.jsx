@@ -1,6 +1,14 @@
 /**
- * Sticky header — логотип слева, навигация в центре, телефон + CTA справа.
- * На мобиле — hamburger + CTA.
+ * Sticky transparent header.
+ *
+ * Поведение:
+ *   - По умолчанию прозрачный, текст адаптируется к hero:
+ *       heroTone='light'  → тёмный текст (на surface/paper/stone hero)
+ *       heroTone='dark'   → светлый текст (на sage/slate/moss/ink/brick/coral hero)
+ *   - При hover и при скролле > 40px — заливается paper, текст ink
+ *   - Мобильный overlay — всегда paper фон (как было)
+ *
+ * heroTone передаётся из Layout → из каждой Page.
  */
 
 import { useEffect, useState } from 'react';
@@ -15,36 +23,48 @@ const NAV = [
     { label: 'Контакты', href: '/contacts' },
 ];
 
-export default function Header() {
+export default function Header({ heroTone = 'light' }) {
     const { siteSettings } = usePage().props;
     const phone = siteSettings?.contacts?.phone || '';
     const phoneTel = siteSettings?.contacts?.phone_tel || '';
 
     const [open, setOpen] = useState(false);
-    useEffect(() => { setOpen(false); }, []);
+    const [scrolled, setScrolled] = useState(false);
+
+    // При скролле > 40px — залить фон paper независимо от hover
+    useEffect(() => {
+        if (typeof window === 'undefined') return;
+        const onScroll = () => setScrolled(window.scrollY > 40);
+        onScroll();
+        window.addEventListener('scroll', onScroll, { passive: true });
+        return () => window.removeEventListener('scroll', onScroll);
+    }, []);
+
+    // Adapt to hero tone
+    const toneClass = heroTone === 'dark' ? 'letyagin-header--on-dark' : 'letyagin-header--on-light';
+    const stateClass = scrolled ? 'letyagin-header--scrolled' : '';
 
     return (
-        <header className="sticky top-0 z-50 bg-paper/95 backdrop-blur-sm border-b border-ink/10">
+        <header
+            className={`letyagin-header ${toneClass} ${stateClass} sticky top-0 z-50 transition-colors duration-[var(--duration-standard)] ease-[var(--ease-standard)]`}
+        >
             <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-14 flex items-center justify-between gap-4 h-16 md:h-20">
 
-                {/* Logo */}
                 <Link href="/" className="shrink-0 font-[family-name:var(--font-display)] text-2xl md:text-3xl leading-none tracking-tight">
                     ЛетягинЪ
                 </Link>
 
-                {/* Desktop nav */}
                 <nav className="hidden lg:flex items-center gap-7 font-[family-name:var(--font-ui)] uppercase tracking-[0.18em] text-[11px]">
                     {NAV.map((n) => (
-                        <Link key={n.href} href={n.href} className="hover:text-rust transition-colors">
+                        <Link key={n.href} href={n.href} className="letyagin-header__link transition-colors">
                             {n.label}
                         </Link>
                     ))}
                 </nav>
 
-                {/* Desktop right side */}
                 <div className="hidden md:flex items-center gap-5">
                     {phone && (
-                        <a href={`tel:${phoneTel}`} className="font-[family-name:var(--font-ui)] uppercase tracking-[0.18em] text-[11px] hover:text-rust transition-colors tnum">
+                        <a href={`tel:${phoneTel}`} className="letyagin-header__link font-[family-name:var(--font-ui)] uppercase tracking-[0.18em] text-[11px] tnum transition-colors">
                             {phone}
                         </a>
                     )}
@@ -53,23 +73,21 @@ export default function Header() {
                     </a>
                 </div>
 
-                {/* Mobile hamburger */}
                 <button
-                    className="lg:hidden flex items-center justify-center w-10 h-10 -mr-2"
+                    className="lg:hidden flex items-center justify-center w-10 h-10 -mr-2 letyagin-header__link"
                     onClick={() => setOpen(v => !v)}
                     aria-label="Меню"
                 >
                     <div className="flex flex-col gap-1.5">
-                        <span className="w-6 h-px bg-ink"></span>
-                        <span className="w-6 h-px bg-ink"></span>
-                        <span className="w-6 h-px bg-ink"></span>
+                        <span className="w-6 h-px bg-current"></span>
+                        <span className="w-6 h-px bg-current"></span>
+                        <span className="w-6 h-px bg-current"></span>
                     </div>
                 </button>
             </div>
 
-            {/* Mobile overlay */}
             {open && (
-                <div className="lg:hidden border-t border-ink/10 bg-paper">
+                <div className="lg:hidden bg-paper text-ink border-t border-ink/10">
                     <nav className="px-6 py-6 flex flex-col gap-4 font-[family-name:var(--font-ui)] uppercase tracking-[0.18em] text-xs">
                         {NAV.map((n) => (
                             <Link key={n.href} href={n.href} className="py-1" onClick={() => setOpen(false)}>
