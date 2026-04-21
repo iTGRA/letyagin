@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace App\Orchid;
 
+use App\Models\ContactFormRequest;
+use App\Models\CorporateRequest;
+use App\Models\EventRequest;
+use App\Models\TableBookingRequest;
 use Orchid\Platform\Dashboard;
 use Orchid\Platform\ItemPermission;
 use Orchid\Platform\OrchidServiceProvider;
@@ -12,91 +16,127 @@ use Orchid\Support\Color;
 
 class PlatformProvider extends OrchidServiceProvider
 {
-    /**
-     * Bootstrap the application services.
-     *
-     * @param Dashboard $dashboard
-     *
-     * @return void
-     */
     public function boot(Dashboard $dashboard): void
     {
         parent::boot($dashboard);
-
-        // ...
     }
 
     /**
-     * Register the application menu.
-     *
-     * @return Menu[]
+     * Меню админки отеля. Группировка — по смыслу, а не по алфавиту.
      */
     public function menu(): array
     {
         return [
-            Menu::make('Get Started')
-                ->icon('bs.book')
-                ->title('Navigation')
-                ->route(config('platform.index')),
+            // ─── ДАШБОРД ──────────────────────────────────────────
+            Menu::make('Дашборд')
+                ->icon('bs.speedometer2')
+                ->route('platform.main')
+                ->title('ЛетягинЪ'),
 
-            Menu::make('Sample Screen')
-                ->icon('bs.collection')
-                ->route('platform.example')
-                ->badge(fn () => 6),
+            // ─── ГЛАВНАЯ СТРАНИЦА ─────────────────────────────────
+            Menu::make('Hero-слайды')
+                ->icon('bs.image')
+                ->route('platform.hero-slides'),
 
-            Menu::make('Form Elements')
-                ->icon('bs.card-list')
-                ->route('platform.example.fields')
-                ->active('*/examples/form/*'),
+            Menu::make('Страницы (SEO)')
+                ->icon('bs.file-text')
+                ->route('platform.pages'),
 
-            Menu::make('Layouts Overview')
-                ->icon('bs.window-sidebar')
-                ->route('platform.example.layouts'),
+            // ─── НОМЕРА ───────────────────────────────────────────
+            Menu::make('Номера')
+                ->icon('bs.door-open')
+                ->route('platform.rooms')
+                ->title('Номера'),
 
-            Menu::make('Grid System')
-                ->icon('bs.columns-gap')
-                ->route('platform.example.grid'),
+            Menu::make('Удобства (справочник)')
+                ->icon('bs.list-check')
+                ->route('platform.room-amenities'),
 
-            Menu::make('Charts')
-                ->icon('bs.bar-chart')
-                ->route('platform.example.charts'),
+            // ─── РЕСТОРАН ─────────────────────────────────────────
+            Menu::make('Меню «Дуси»')
+                ->icon('bs.egg-fried')
+                ->route('platform.menu-items')
+                ->title('Ресторан'),
 
-            Menu::make('Cards')
-                ->icon('bs.card-text')
-                ->route('platform.example.cards')
-                ->divider(),
+            Menu::make('Команда')
+                ->icon('bs.person-workspace')
+                ->route('platform.team-members'),
+
+            // ─── КОНТЕНТ ──────────────────────────────────────────
+            Menu::make('Места рядом')
+                ->icon('bs.geo-alt')
+                ->route('platform.nearby-places')
+                ->title('Контент'),
+
+            Menu::make('Услуги отеля')
+                ->icon('bs.gem')
+                ->route('platform.services'),
+
+            Menu::make('Галерея деталей')
+                ->icon('bs.images')
+                ->route('platform.gallery'),
+
+            Menu::make('Отзывы')
+                ->icon('bs.star')
+                ->route('platform.reviews'),
+
+            Menu::make('FAQ')
+                ->icon('bs.question-circle')
+                ->route('platform.faqs'),
+
+            Menu::make('История (таймлайн)')
+                ->icon('bs.hourglass-split')
+                ->route('platform.history-milestones'),
+
+            // ─── ЗАЯВКИ ───────────────────────────────────────────
+            Menu::make('Бронь стола')
+                ->icon('bs.cup-hot')
+                ->route('platform.requests.table-booking')
+                ->title('Заявки')
+                ->badge(fn () => TableBookingRequest::where('status', 'new')->count() ?: null, Color::DANGER),
+
+            Menu::make('Мероприятия (Холл)')
+                ->icon('bs.calendar-event')
+                ->route('platform.requests.event')
+                ->badge(fn () => EventRequest::where('status', 'new')->count() ?: null, Color::DANGER),
+
+            Menu::make('Корп-тариф')
+                ->icon('bs.briefcase')
+                ->route('platform.requests.corporate')
+                ->badge(fn () => CorporateRequest::where('status', 'new')->count() ?: null, Color::DANGER),
+
+            Menu::make('Обратная связь')
+                ->icon('bs.envelope')
+                ->route('platform.requests.contact')
+                ->badge(fn () => ContactFormRequest::where('status', 'new')->count() ?: null, Color::DANGER),
+
+            // ─── УПРАВЛЕНИЕ ───────────────────────────────────────
+            Menu::make('Бегущая строка')
+                ->icon('bs.megaphone')
+                ->route('platform.announcement')
+                ->title('Маркетинг'),
+
+            Menu::make('Popup')
+                ->icon('bs.chat-square')
+                ->route('platform.popup'),
+
+            Menu::make('Настройки сайта')
+                ->icon('bs.gear')
+                ->route('platform.site-settings')
+                ->title('Система'),
 
             Menu::make(__('Users'))
                 ->icon('bs.people')
                 ->route('platform.systems.users')
-                ->permission('platform.systems.users')
-                ->title(__('Access Controls')),
+                ->permission('platform.systems.users'),
 
             Menu::make(__('Roles'))
                 ->icon('bs.shield')
                 ->route('platform.systems.roles')
-                ->permission('platform.systems.roles')
-                ->divider(),
-
-            Menu::make('Documentation')
-                ->title('Docs')
-                ->icon('bs.box-arrow-up-right')
-                ->url('https://orchid.software/en/docs')
-                ->target('_blank'),
-
-            Menu::make('Changelog')
-                ->icon('bs.box-arrow-up-right')
-                ->url('https://github.com/orchidsoftware/platform/blob/master/CHANGELOG.md')
-                ->target('_blank')
-                ->badge(fn () => Dashboard::version(), Color::DARK),
+                ->permission('platform.systems.roles'),
         ];
     }
 
-    /**
-     * Register permissions for the application.
-     *
-     * @return ItemPermission[]
-     */
     public function permissions(): array
     {
         return [
