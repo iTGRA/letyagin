@@ -207,6 +207,30 @@ Mix manifest not found`. Главная `/` работает.
 
 **Инцидент-триггер:** 2026-04-21, deploy Фазы 2B-5.
 
+### L4. Eloquent-модели в Orchid Layout::table требуют trait `AsSource`
+
+```php
+use Orchid\Screen\AsSource;
+
+class HeroSlide extends Model
+{
+    use AsSource;  // ← обязательно для Layout::table(...) в списочных Screen'ах
+    // ...
+}
+```
+
+**Почему:** `Layout::table()` в Orchid 14 при рендере каждой строки вызывает
+`$model->getContent($field)` — метод из трейта `Orchid\Screen\AsSource`.
+Без него — 500 `Call to undefined method App\Models\X::getContent()`.
+
+**Симптом:** `/admin/<model-list>` → 500 с `Call to undefined method
+getContent()`. EditScreen работает (там Layout::rows, не table).
+
+**Как применять:** любой новый Model, отображаемый через `Layout::table()`,
+— добавить `use AsSource;` в импортах и в trait-блок класса.
+
+**Инцидент-триггер:** 2026-04-21, `/admin/hero-slides` после deploy 2B-5.
+
 ---
 
 ## Инфраструктура
