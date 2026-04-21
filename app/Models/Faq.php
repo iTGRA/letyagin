@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Orchid\Screen\AsSource;
 
 /**
  * Faq — вопрос-ответ для блока FAQ (снятие возражений).
@@ -11,7 +12,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Faq extends Model
 {
-    protected $table = 'faqs';
+    
+    use AsSource;protected $table = 'faqs';
 
     protected $fillable = ['question', 'answer', 'sort_order', 'is_active'];
 

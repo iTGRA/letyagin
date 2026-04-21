@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Orchid\Screen\AsSource;
 
 /**
  * Review — отзыв гостя. Импортируется с Яндекса/2ГИС или добавляется
@@ -11,7 +12,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Review extends Model
 {
-    protected $fillable = [
+    
+    use AsSource;protected $fillable = [
         'author_name', 'source', 'source_url', 'rating', 'text', 'topic',
         'posted_at', 'is_featured', 'is_active', 'sort_order',
     ];

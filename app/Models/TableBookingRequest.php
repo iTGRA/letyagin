@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Orchid\Screen\AsSource;
 
 /**
  * TableBookingRequest — заявка на бронь стола в ресторане «Дуся».
@@ -10,7 +11,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class TableBookingRequest extends Model
 {
-    protected $fillable = [
+    
+    use AsSource;protected $fillable = [
         'name', 'phone', 'email', 'desired_date', 'desired_time',
         'guests_count', 'comment', 'source', 'status', 'admin_notes',
         'ip', 'user_agent',

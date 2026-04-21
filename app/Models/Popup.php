@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Orchid\Attachment\Attachable;
+use Orchid\Screen\AsSource;
 
 /**
  * Popup — модальное окно. SINGLETON: редактируем запись с id=1.
@@ -12,6 +13,7 @@ use Orchid\Attachment\Attachable;
 class Popup extends Model
 {
     use Attachable;
+    use AsSource;
 
     public const SINGLETON_ID = 1;
 

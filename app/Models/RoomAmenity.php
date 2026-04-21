@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Orchid\Screen\AsSource;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
@@ -11,7 +12,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  */
 class RoomAmenity extends Model
 {
-    protected $fillable = ['name', 'icon_name', 'sort_order', 'is_active'];
+    
+    use AsSource;protected $fillable = ['name', 'icon_name', 'sort_order', 'is_active'];
 
     protected $casts = [
         'is_active' => 'boolean',

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Orchid\Attachment\Attachable;
+use Orchid\Screen\AsSource;
 
 /**
  * HistoryMilestone — веха в таймлайне истории особняка
@@ -13,6 +14,7 @@ use Orchid\Attachment\Attachable;
 class HistoryMilestone extends Model
 {
     use Attachable;
+    use AsSource;
 
     protected $fillable = [
         'year_label', 'headline', 'body', 'image_id',

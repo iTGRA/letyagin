@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Orchid\Attachment\Attachable;
+use Orchid\Screen\AsSource;
 
 /**
  * GalleryItem — фото для блока «Галерея деталей» (клеймо, интерьер,
@@ -14,6 +15,7 @@ use Orchid\Attachment\Attachable;
 class GalleryItem extends Model
 {
     use Attachable;
+    use AsSource;
 
     protected $fillable = [
         'image_id', 'alt_text', 'caption', 'category',

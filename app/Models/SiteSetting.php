@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Orchid\Screen\AsSource;
 use Illuminate\Support\Facades\Cache;
 
 /**
@@ -16,7 +17,8 @@ use Illuminate\Support\Facades\Cache;
  */
 class SiteSetting extends Model
 {
-    public const CACHE_KEY = 'site.settings.all';
+    
+    use AsSource;public const CACHE_KEY = 'site.settings.all';
     public const CACHE_TTL = 3600;
 
     protected $fillable = [

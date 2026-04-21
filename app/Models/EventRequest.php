@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Orchid\Screen\AsSource;
 
 /**
  * EventRequest — заявка на мероприятие в ЛетягинЪ-Холле
@@ -10,7 +11,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class EventRequest extends Model
 {
-    protected $fillable = [
+    
+    use AsSource;protected $fillable = [
         'name', 'phone', 'email', 'event_type', 'event_date',
         'guests_count', 'comment', 'source', 'status', 'admin_notes',
         'ip', 'user_agent',

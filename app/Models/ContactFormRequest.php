@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Orchid\Screen\AsSource;
 
 /**
  * ContactFormRequest — общая форма обратной связи с /contacts.
@@ -10,7 +11,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class ContactFormRequest extends Model
 {
-    protected $fillable = [
+    
+    use AsSource;protected $fillable = [
         'name', 'phone', 'email', 'message',
         'source', 'status', 'admin_notes', 'ip', 'user_agent',
     ];

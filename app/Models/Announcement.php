@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Orchid\Screen\AsSource;
 
 /**
  * Announcement — бегущая строка над хедером. SINGLETON: всегда редактируем
@@ -12,7 +13,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Announcement extends Model
 {
-    public const SINGLETON_ID = 1;
+    
+    use AsSource;public const SINGLETON_ID = 1;
 
     protected $fillable = [
         'is_enabled', 'text', 'link_url', 'link_text',

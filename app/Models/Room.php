@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Orchid\Attachment\Attachable;
+use Orchid\Screen\AsSource;
 
 /**
  * Room — номер отеля. 19 физических номеров = 19 уникальных записей.
@@ -15,6 +16,7 @@ use Orchid\Attachment\Attachable;
 class Room extends Model
 {
     use Attachable;
+    use AsSource;
 
     protected $fillable = [
         'slug', 'name', 'category', 'area_m2', 'guests', 'extra_bed',

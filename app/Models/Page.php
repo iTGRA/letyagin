@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Orchid\Attachment\Attachable;
+use Orchid\Screen\AsSource;
 
 /**
  * Page — SEO-метаданные и общие контентные строки для каждого URL.
@@ -13,6 +14,7 @@ use Orchid\Attachment\Attachable;
 class Page extends Model
 {
     use Attachable;
+    use AsSource;
 
     public const SLUGS = [
         '' => 'Главная',

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Orchid\Attachment\Attachable;
+use Orchid\Screen\AsSource;
 
 /**
  * NearbyPlace — место путеводителя для /nearby и блока «Лучшее рядом».
@@ -13,6 +14,7 @@ use Orchid\Attachment\Attachable;
 class NearbyPlace extends Model
 {
     use Attachable;
+    use AsSource;
 
     protected $fillable = [
         'slug', 'name', 'category', 'description', 'image_id',

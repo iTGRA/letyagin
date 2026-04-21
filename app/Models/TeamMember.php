@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Orchid\Attachment\Attachable;
+use Orchid\Screen\AsSource;
 
 /**
  * TeamMember — член команды отеля (шеф, менеджер, etc).
@@ -13,6 +14,7 @@ use Orchid\Attachment\Attachable;
 class TeamMember extends Model
 {
     use Attachable;
+    use AsSource;
 
     protected $fillable = [
         'name', 'role', 'slug', 'bio', 'photo_id', 'facts',

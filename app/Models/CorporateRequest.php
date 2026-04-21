@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Orchid\Screen\AsSource;
 
 /**
  * CorporateRequest — заявка на корпоративный тариф от компании
@@ -11,7 +12,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class CorporateRequest extends Model
 {
-    protected $fillable = [
+    
+    use AsSource;protected $fillable = [
         'name', 'company', 'phone', 'email',
         'estimated_nights_per_year', 'comment', 'source',
         'status', 'admin_notes', 'ip', 'user_agent',

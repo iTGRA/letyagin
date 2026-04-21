@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Orchid\Attachment\Attachable;
+use Orchid\Screen\AsSource;
 
 /**
  * HeroSlide — слайд главного Hero на /. Карусель 4-5 слайдов.
@@ -13,6 +14,7 @@ use Orchid\Attachment\Attachable;
 class HeroSlide extends Model
 {
     use Attachable;
+    use AsSource;
 
     protected $fillable = [
         'image_id', 'video_url', 'title', 'subtitle',

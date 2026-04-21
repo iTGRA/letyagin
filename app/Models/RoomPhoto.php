@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Orchid\Attachment\Attachable;
+use Orchid\Screen\AsSource;
 
 /**
  * RoomPhoto — фото в галерее номера (one-to-many к Room).
@@ -12,6 +13,7 @@ use Orchid\Attachment\Attachable;
 class RoomPhoto extends Model
 {
     use Attachable;
+    use AsSource;
 
     protected $fillable = ['room_id', 'image_id', 'alt_text', 'sort_order'];
 

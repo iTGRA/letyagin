@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Orchid\Attachment\Attachable;
+use Orchid\Screen\AsSource;
 
 /**
  * RestaurantMenuItem — блюдо ресторана «Дуся».
@@ -13,6 +14,7 @@ use Orchid\Attachment\Attachable;
 class RestaurantMenuItem extends Model
 {
     use Attachable;
+    use AsSource;
 
     protected $fillable = [
         'name', 'category', 'description', 'price_hint', 'image_id',

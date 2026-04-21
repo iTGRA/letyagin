@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Orchid\Screen\AsSource;
 
 /**
  * Service — услуга отеля для блока «Услуги и удобства» на главной
@@ -11,7 +12,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Service extends Model
 {
-    protected $fillable = ['name', 'description', 'icon_name', 'sort_order', 'is_active'];
+    
+    use AsSource;protected $fillable = ['name', 'description', 'icon_name', 'sort_order', 'is_active'];
 
     protected $casts = [
         'is_active' => 'boolean',
