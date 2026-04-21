@@ -1,0 +1,27 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        Schema::create('room_photos', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('room_id')->constrained('rooms')->cascadeOnDelete();
+            $table->unsignedBigInteger('image_id');
+            $table->string('alt_text', 200)->nullable();
+            $table->integer('sort_order')->default(0);
+            $table->timestamps();
+
+            $table->index(['room_id', 'sort_order']);
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::dropIfExists('room_photos');
+    }
+};
