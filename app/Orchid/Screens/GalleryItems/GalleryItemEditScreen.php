@@ -11,6 +11,7 @@ use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Fields\CheckBox;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Select;
+use Orchid\Screen\Fields\TextArea;
 use Orchid\Screen\Fields\Upload;
 use Orchid\Screen\Screen;
 use Orchid\Support\Color;
@@ -39,8 +40,15 @@ class GalleryItemEditScreen extends Screen
         return [
             Layout::rows([
                 Upload::make('item.image_id')->title('Изображение')->maxFiles(1)->acceptedFiles('image/*'),
-                Input::make('item.alt_text')->title('Alt-текст')->help('Описание для SEO/доступности')->required()->maxlength(200),
-                Input::make('item.caption')->title('Подпись (опционально)')->maxlength(500),
+                Input::make('item.alt_text')->title('Alt-текст')->help('Описание для SEO / доступности')->required()->maxlength(200),
+                Input::make('item.caption')
+                    ->title('Короткая подпись')
+                    ->help('Мелкая Müller-строка под фото: «Кладка 1883», «Латунь и медь». До 40 символов для красоты.')
+                    ->maxlength(500),
+                TextArea::make('item.description')
+                    ->title('Описание')
+                    ->rows(3)
+                    ->help('Короткое или длинное — длины нарочно разные, создают ритм колонок на главной.'),
                 Select::make('item.category')->title('Категория')->options(GalleryItem::CATEGORIES)->empty('— без категории —'),
                 Select::make('item.aspect')->title('Аспект')->options(GalleryItem::ASPECTS)->value('wide'),
                 Input::make('item.sort_order')->title('Порядок')->type('number')->value(0),
@@ -54,6 +62,7 @@ class GalleryItemEditScreen extends Screen
         $data = $request->validate([
             'item.alt_text' => ['required', 'string', 'max:200'],
             'item.caption' => ['nullable', 'string', 'max:500'],
+            'item.description' => ['nullable', 'string', 'max:2000'],
             'item.category' => ['nullable', 'string', 'max:60'],
             'item.aspect' => ['required', 'string', 'in:tall,wide,square'],
             'item.sort_order' => ['nullable', 'integer'],

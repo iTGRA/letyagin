@@ -12,6 +12,8 @@
  */
 
 import { Head } from '@inertiajs/react';
+import { useState } from 'react';
+import RoomFullScreenCard, { ROOM_SHOWCASE } from '@/Components/Blocks/RoomFullScreenCard';
 
 export default function Lab() {
     return (
@@ -20,6 +22,13 @@ export default function Lab() {
 
             <main className="min-h-screen bg-paper text-ink font-[family-name:var(--font-body)]">
                 <TopBar />
+
+                {/* ── NEW 23 · эксперимент — полноэкранные карточки номеров ── */}
+                <Section number="23" title="Номера — full-screen блоки" caption="Эксперимент: плашка слева · галерея справа · 5 цветовых воплощений">
+                    <RoomShowcaseExperiment />
+                </Section>
+
+                <Divider />
 
                 <Section number="01" title="Сетка" caption="12-колонный модуль, 4 / 8 / 12 gutter">
                     <GridDemo />
@@ -1623,6 +1632,20 @@ function ColumnsRegistry() {
                     </div>
                 ))}
             </div>
+        </div>
+    );
+}
+
+/* =============================================================================
+ * 23. Room Showcase — перенесено в Components/Blocks/RoomFullScreenCard.jsx
+ * ========================================================================== */
+
+function RoomShowcaseExperiment() {
+    return (
+        <div className="-mx-6 md:-mx-12">
+            {ROOM_SHOWCASE.map((room) => (
+                <RoomFullScreenCard key={room.slug} room={room} />
+            ))}
         </div>
     );
 }

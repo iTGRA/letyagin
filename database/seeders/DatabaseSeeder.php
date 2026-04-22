@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             HistoryMilestonesSeeder::class,
             TeamMembersSeeder::class,
             RestaurantMenuItemsSeeder::class,
+            GalleryItemsSeeder::class,
             SingletonsSeeder::class,
         ]);
     }

@@ -20,7 +20,7 @@ class GalleryItem extends Model
     use ResolvesAttachment;
 
     protected $fillable = [
-        'image_id', 'alt_text', 'caption', 'category',
+        'image_id', 'alt_text', 'caption', 'description', 'category',
         'aspect', 'is_active', 'sort_order',
     ];
 

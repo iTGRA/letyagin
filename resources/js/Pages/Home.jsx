@@ -13,6 +13,7 @@ import Layout from '@/Components/Layout/Layout';
 import { Placeholder, SectionHeader, Section, InlineDivider } from '@/Components/UI/Primitives';
 import Img from '@/Components/UI/Img';
 import KonturWidgetStub from '@/Components/Blocks/KonturWidgetStub';
+import RoomFullScreenCard, { ROOM_SHOWCASE } from '@/Components/Blocks/RoomFullScreenCard';
 
 export default function Home(props) {
     const { page, featuredRooms = [], allRooms = [], services = [], roomAmenities = [], featuredMenuItems = [],
@@ -127,61 +128,34 @@ export default function Home(props) {
                 </div>
             </Section>
 
-            {/* ─── BLOCK 05 · ROOMS showcase — full-bleed mixed-aspect gallery ─── */}
-            <section className="bg-surface text-ink">
-                <div className="max-w-[1440px] mx-auto px-6 md:px-12 pt-20 md:pt-28">
+            {/* ─── BLOCK 05 · ROOMS showcase — full-screen карточки на всю ширину ─── */}
+            <section className="bg-paper text-ink">
+                {/* Заголовок над серией карточек */}
+                <div className="max-w-[1440px] mx-auto px-6 md:px-12 pt-20 md:pt-28 pb-12 md:pb-16">
                     <SectionHeader title="Номера" caption={e.rooms_subtitle || ''} />
                 </div>
 
-                {/* Full-width galley: grid-cols-12, mixed spans by pattern */}
-                <div className="px-3 md:px-5 pb-20 md:pb-28">
-                    <div className="grid grid-cols-2 md:grid-cols-12 gap-3 md:gap-4">
-                        {allRooms.map((r, i) => {
-                            // Ритм: [портрет · портрет · пейзаж] · [пейзаж · портрет · портрет] и далее
-                            const p = i % 6;
-                            const isLandscape = p === 2 || p === 3;
-                            const spanClass = isLandscape ? 'md:col-span-6' : 'md:col-span-3';
-                            const aspectClass = isLandscape ? 'aspect-[4/3]' : 'aspect-[3/4]';
-                            // Картинка: если есть hero_image_url из Orchid — используем, иначе из пула media-bank
-                            const src = r.hero_image_url || `/images/media-bank/${ROOMS_FALLBACK[i % ROOMS_FALLBACK.length]}`;
+                {/* 5 full-screen карточек подряд — каждая в своём цвете палитры */}
+                <div>
+                    {ROOM_SHOWCASE.map((room) => (
+                        <RoomFullScreenCard key={room.slug} room={room} />
+                    ))}
+                </div>
 
-                            return (
-                                <Link
-                                    key={r.id}
-                                    href={`/rooms/${r.slug}`}
-                                    className={`col-span-1 ${spanClass} group relative overflow-hidden`}
-                                >
-                                    <div className={`${aspectClass} overflow-hidden`}>
-                                        <img
-                                            src={src}
-                                            alt={r.name}
-                                            loading="lazy"
-                                            className="w-full h-full object-cover transition-transform duration-[var(--duration-slow)] group-hover:scale-[1.03]"
-                                        />
-                                    </div>
-
-                                    {/* Overlay с текстом — всегда видим, но с лёгким gradient снизу */}
-                                    <div className="absolute inset-0 bg-gradient-to-t from-ink/75 via-ink/30 to-transparent pointer-events-none" />
-
-                                    <div className="absolute inset-x-0 bottom-0 p-4 md:p-5 text-paper">
-                                        <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.18em] text-[10px] opacity-80 tnum mb-1">
-                                            {r.area_m2} м² · до {r.guests} {pluralGuests(r.guests)}
-                                        </div>
-                                        <div className="font-[family-name:var(--font-display)] text-lg md:text-xl leading-[1.15]">
-                                            {r.name}
-                                        </div>
-                                    </div>
-                                </Link>
-                            );
-                        })}
-                    </div>
-
-                    <div className="mt-10 text-center max-w-[1440px] mx-auto">
+                {/* CTA под галереей — 2 кнопки */}
+                <div className="max-w-[1440px] mx-auto px-6 md:px-12 py-20 md:py-28">
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6">
+                        <a
+                            href="#widget-hero"
+                            className="font-[family-name:var(--font-ui)] uppercase tracking-[0.16em] text-sm px-8 py-4 bg-rust text-paper hover:bg-[color:var(--color-rust-deep)] transition-colors duration-[var(--duration-standard)] inline-block"
+                        >
+                            Забронировать
+                        </a>
                         <Link
                             href="/rooms"
-                            className="font-[family-name:var(--font-ui)] uppercase tracking-[0.16em] text-xs inline-block px-8 py-4 border border-ink hover:bg-ink hover:text-paper transition-colors"
+                            className="font-[family-name:var(--font-ui)] uppercase tracking-[0.16em] text-sm px-8 py-4 border border-ink text-ink hover:bg-ink hover:text-paper transition-colors duration-[var(--duration-standard)] inline-block"
                         >
-                            Страница каталога номеров →
+                            Смотреть все номера
                         </Link>
                     </div>
                 </div>
@@ -446,21 +420,40 @@ export default function Home(props) {
                 </div>
             </Section>
 
-            {/* ─── BLOCK 12 · Gallery details ───────────────────── */}
-            <Section bg="paper">
-                <SectionHeader title="Детали" caption={e.gallery_subtitle || ''} />
-                <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
-                    {GALLERY_DETAILS.map((filename, i) => (
-                        <img
-                            key={i}
-                            src={`/images/media-bank/${filename}`}
-                            alt={`Деталь ${i + 1}`}
-                            loading="lazy"
-                            className="w-full aspect-square object-cover"
-                        />
-                    ))}
-                </div>
-            </Section>
+            {/* ─── BLOCK 12 · Gallery details — из админки /admin/gallery ── */}
+            {galleryPreview.length > 0 && (
+                <Section bg="paper">
+                    <SectionHeader title="Детали" caption={e.gallery_subtitle || ''} />
+                    <div className="grid grid-cols-2 md:grid-cols-6 gap-x-3 md:gap-x-4 gap-y-10">
+                        {galleryPreview.slice(0, 6).map((item, i) => {
+                            const src = item.image_url || `/images/media-bank/${GALLERY_FALLBACK[i % GALLERY_FALLBACK.length]}`;
+                            return (
+                                <figure key={item.id} className="flex flex-col gap-4">
+                                    <img
+                                        src={src}
+                                        alt={item.alt_text || item.caption}
+                                        loading="lazy"
+                                        className="w-full aspect-square object-cover"
+                                    />
+                                    <figcaption className="flex flex-col gap-3">
+                                        {/* Müller-строка: номер + короткая подпись */}
+                                        <div className="flex items-baseline gap-3 font-[family-name:var(--font-ui)] uppercase tracking-[0.18em] text-[9px] md:text-[10px] leading-[1.5]">
+                                            <span className="text-rust tnum opacity-80">{String(i + 1).padStart(2, '0')}</span>
+                                            <span className="opacity-70">{item.caption}</span>
+                                        </div>
+                                        {/* Описание — длина варьируется, формирует ритм */}
+                                        {item.description && (
+                                            <p className="font-[family-name:var(--font-body)] text-[13px] leading-[1.55] opacity-80 [text-wrap:balance]">
+                                                {item.description}
+                                            </p>
+                                        )}
+                                    </figcaption>
+                                </figure>
+                            );
+                        })}
+                    </div>
+                </Section>
+            )}
 
             {/* ─── BLOCK 13 · Reviews ──────────────────────────── */}
             <Section bg="surface">
@@ -557,21 +550,16 @@ function pluralGuests(n) {
 }
 
 /**
- * 12 фото для блока «Детали».
+ * Фолбэк-фото для блока «Детали», если у GalleryItem не загружено фото
+ * через Orchid. Контент (caption, description) всегда из БД.
  */
-const GALLERY_DETAILS = [
+const GALLERY_FALLBACK = [
     'SPR_6789-HDR.jpg',
-    'SPR_6855-HDR.jpg',
-    'SPR_6837-HDR.jpg',
-    'SPR_6742-HDR.jpg',
-    'SPR_6678-HDR.jpg',
+    'SPR_6763-HDR.jpg',
+    'SPR_6444-HDR.jpg',
     'SPR_6519-HDR.jpg',
-    'SPR_6549-HDR.jpg',
-    'SPR_6861-HDR.jpg',
-    'SPR_6603-HDR.jpg',
-    'SPR_6486-HDR.jpg',
-    'SPR_6684-HDR.jpg',
-    'SPR_6270-HDR.jpg',
+    'SPR_6246-HDR.jpg',
+    'SPR_6822-HDR.jpg',
 ];
 
 function categoryLabel(c) {
