@@ -24,3 +24,17 @@ _ide_helper.php
 Homestead.json
 Homestead.yaml
 Thumbs.db
+
+# Случайно пришедшие фото-файлы (Telegram, сторонние фоны). Брендовые
+# ассеты держим в public/images/ и public/images/media-bank/ явно.
+/public/images/photo_*.jpg
+/public/images/photo_*.jpeg
+/public/images/photo_*.png
+/public/images/Srilanka-*.jpg
+/public/images/DS_Store
+
+# Dev / hot-reload / редакторы
+.idea
+.vscode
+.cursor
+.zed

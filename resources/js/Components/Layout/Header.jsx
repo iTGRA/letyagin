@@ -56,7 +56,7 @@ export default function Header({ heroTone = 'light' }) {
 
                 <nav className="hidden lg:flex items-center gap-7 font-[family-name:var(--font-ui)] uppercase tracking-[0.18em] text-[11px]">
                     {NAV.map((n) => (
-                        <Link key={n.href} href={n.href} className="letyagin-header__link transition-colors">
+                        <Link key={n.href} href={n.href} className="letyagin-header__link letyagin-header__navlink transition-colors">
                             {n.label}
                         </Link>
                     ))}

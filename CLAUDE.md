@@ -231,6 +231,35 @@ getContent()`. EditScreen работает (там Layout::rows, не table).
 
 **Инцидент-триггер:** 2026-04-21, `/admin/hero-slides` после deploy 2B-5.
 
+### L5. Тяжёлые media-папки исключать из основного rsync
+
+```bash
+# ✅ правильно — код быстро, фото отдельно
+rsync -az --exclude='public/images' ./ na-ugle:/var/www/letyagin/
+rsync -az public/images/media-bank/ na-ugle:/var/www/letyagin/public/images/media-bank/ &
+
+# ❌ неправильно — rsync «повисает» на 70MB фото, выглядит как зависание
+rsync -az ./ na-ugle:/var/www/letyagin/
+```
+
+**Почему:** `public/images/media-bank/` сейчас ≈ 67MB (138 фото). При
+включении в основной rsync он занимает 5-10 минут, и этого достаточно,
+чтобы `run_in_background: true` «съел» stdout и оставил output-файл
+пустым → выглядит, словно команда зависла, а deploy не прошёл.
+
+**Симптом:** после «deploy» главная отдаёт старый код (кеш сохранился),
+а логи rsync пустые. Изменения Home.jsx не применились, но сервис
+перезапустился — путаница.
+
+**Как применять:** основной deploy = только код, исключая
+`public/images`. Фото-папки — отдельным `rsync` (можно фоновым) и только
+когда меняется media. Точечные файлы (hero-home.jpg, dusya-main.jpg) —
+индивидуальными `scp`/`rsync`.
+
+**Инцидент-триггер:** 2026-04-21, деплой блока «Детали» — rsync завис
+на media-bank, обновления кода не дошли, галерея продолжала показывать
+плейсхолдеры.
+
 ---
 
 ## Инфраструктура

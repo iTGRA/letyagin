@@ -145,6 +145,27 @@
   color: var(--color-rust);
 }
 
+/* Навигация: тонкая линия под пунктом при hover (ровно в ширину слова) */
+.letyagin-header__navlink {
+  position: relative;
+  padding-bottom: 4px;
+}
+.letyagin-header__navlink::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--duration-standard) var(--ease-standard);
+}
+.letyagin-header__navlink:hover::after {
+  transform: scaleX(1);
+}
+
 /* -----------------------------------------------------------------------------
  * prefers-reduced-motion — обязательное отключение всего
  * -------------------------------------------------------------------------- */

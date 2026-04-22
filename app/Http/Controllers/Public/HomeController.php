@@ -34,6 +34,7 @@ class HomeController extends Controller
             'page' => Page::forSlug(''),
             'heroSlides'         => Cache::rememberForever('hero.slides',      fn () => HeroSlide::active()->get()->values()->toArray()),
             'featuredRooms'      => Cache::rememberForever('rooms.featured',   fn () => Room::featured()->take(5)->get(['id', 'slug', 'name', 'category', 'area_m2', 'guests', 'short_description', 'hero_image_id', 'features'])->values()->toArray()),
+            'allRooms'           => Cache::rememberForever('rooms.all.home',   fn () => Room::active()->get(['id', 'slug', 'name', 'category', 'area_m2', 'guests', 'short_description', 'hero_image_id', 'features'])->values()->toArray()),
             'services'           => Cache::rememberForever('services.active',  fn () => Service::active()->get()->values()->toArray()),
             'roomAmenities'      => Cache::rememberForever('rooms.amenities',  fn () => RoomAmenity::active()->get()->values()->toArray()),
             'featuredMenuItems'  => Cache::rememberForever('menu.featured',    fn () => RestaurantMenuItem::featured()->take(8)->get()->values()->toArray()),

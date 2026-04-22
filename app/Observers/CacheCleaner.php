@@ -23,7 +23,7 @@ class CacheCleaner
     protected const KEY_MAP = [
         \App\Models\SiteSetting::class      => [SiteSetting::CACHE_KEY, 'inertia.shared'],
         \App\Models\HeroSlide::class        => ['hero.slides', 'inertia.shared'],
-        \App\Models\Room::class             => ['rooms.all', 'rooms.featured', 'rooms.by_slug'],
+        \App\Models\Room::class             => ['rooms.all', 'rooms.all.home', 'rooms.featured', 'rooms.by_slug'],
         \App\Models\RoomAmenity::class      => ['rooms.all', 'rooms.amenities'],
         \App\Models\RoomPhoto::class        => ['rooms.all', 'rooms.by_slug'],
         \App\Models\Service::class          => ['services.active'],

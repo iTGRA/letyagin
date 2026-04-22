@@ -15,7 +15,7 @@ import Img from '@/Components/UI/Img';
 import KonturWidgetStub from '@/Components/Blocks/KonturWidgetStub';
 
 export default function Home(props) {
-    const { page, featuredRooms = [], services = [], roomAmenities = [], featuredMenuItems = [],
+    const { page, featuredRooms = [], allRooms = [], services = [], roomAmenities = [], featuredMenuItems = [],
             nearbyPreview = [], historyPreview = [], galleryPreview = [], featuredReviews = [], faqs = [] } = props;
     const e = page?.extra ?? {};
 
@@ -26,48 +26,70 @@ export default function Home(props) {
                 <meta name="description" content={page?.meta_description || ''} />
             </Head>
 
-            {/* ─── BLOCK 01 · HERO (surface — светлее paper, отделяется от body) ──── */}
-            <section className="bg-surface text-ink">
-                <div className="max-w-[1440px] mx-auto px-6 md:px-12 pt-24 md:pt-32 pb-14 md:pb-20 grid grid-cols-12 gap-6 md:gap-10 items-center md:min-h-screen">
-                    <div className="col-span-12 md:col-span-6 order-2 md:order-1">
-                        <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.22em] text-[11px] text-rust mb-5">
-                            Бутик-отель · 12 категорий · 19 номеров
-                        </div>
-                        <h1 className="font-[family-name:var(--font-display)] text-[clamp(1.875rem,3.3vw,3.25rem)] leading-[1.08] tracking-[-0.005em] mb-6 md:mb-8 [text-wrap:balance] max-w-[580px]">
-                            {page?.h1 || 'Летягин. Бутик-отель в центре Самары'}
-                        </h1>
-                        <p className="font-[family-name:var(--font-body)] text-base md:text-lg leading-[1.5] opacity-90 max-w-xl mb-8">
-                            {e.hero_subtitle || ''}
-                        </p>
+            {/* ─── BLOCK 01 · HERO (текст слева — центр по оси левой колонки, фото справа) ─── */}
+            {(() => {
+                const heroImg = props.heroSlides?.[0]?.image_url || '/images/hero-home.jpg';
+                return (
+                    <section className="bg-surface text-ink">
+                        <div className="max-w-[1440px] mx-auto px-6 md:px-12 pt-28 md:pt-32 pb-14 md:pb-20 grid grid-cols-12 gap-6 md:gap-10 items-stretch md:min-h-screen">
 
-                        {/* Шильдики */}
-                        <div className="flex flex-wrap gap-3">
-                            <div className="inline-flex items-center gap-4 bg-ink text-paper px-4 py-2.5">
-                                <div className="font-[family-name:var(--font-display)] text-2xl leading-none tnum">5.0</div>
-                                <div className="h-7 w-px bg-paper/30" />
-                                <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.18em] text-[10px] leading-[1.4]">
-                                    298 отзывов<br />Яндекс
+                            {/* Text column — центр-выровнено по своей оси */}
+                            <div className="col-span-12 md:col-span-6 order-2 md:order-1 flex flex-col items-center justify-center text-center py-6 md:py-0">
+                                <div className="max-w-[560px] w-full">
+                                    <h1 className="mb-8 md:mb-10">
+                                        <span className="block font-[family-name:var(--font-display)] text-[clamp(3.5rem,8vw,7rem)] leading-[0.92] tracking-[-0.02em]">
+                                            Летягин.
+                                        </span>
+                                        <span aria-hidden="true" className="block w-14 md:w-16 h-px bg-ink/35 mx-auto my-5 md:my-7" />
+                                        <span className="block font-[family-name:var(--font-display)] text-[clamp(1.125rem,1.75vw,1.75rem)] leading-[1.25] tracking-[-0.005em] italic opacity-90 [text-wrap:balance]">
+                                            Бутик-отель в&nbsp;историческом особняке старого центра Самары
+                                        </span>
+                                    </h1>
+
+                                    <p className="font-[family-name:var(--font-body)] text-base md:text-[17px] leading-[1.6] opacity-85 mb-10 md:mb-12 [text-wrap:balance]">
+                                        19 номеров. Здание XIX&nbsp;века. Ресторан «Дуся» — русская кухня и&nbsp;грандиозные завтраки с&nbsp;8:00.
+                                    </p>
+
+                                    {/* CTA + шильдики в центр */}
+                                    <div className="flex flex-wrap items-center justify-center gap-4 md:gap-5">
+                                        <a
+                                            href="#widget-hero"
+                                            className="font-[family-name:var(--font-ui)] uppercase tracking-[0.16em] text-sm px-7 py-3.5 bg-rust text-paper hover:bg-[color:var(--color-rust-deep)] transition-colors"
+                                        >
+                                            Забронировать
+                                        </a>
+
+                                        <span aria-hidden="true" className="h-8 w-px bg-ink/25 hidden sm:block" />
+
+                                        <div className="flex items-center gap-2.5">
+                                            <span className="font-[family-name:var(--font-display)] text-2xl md:text-3xl leading-none tnum">5.0</span>
+                                            <div className="text-left font-[family-name:var(--font-ui)] uppercase tracking-[0.18em] text-[9px] leading-[1.4] opacity-70">
+                                                298 отзывов<br />на Яндекс
+                                            </div>
+                                        </div>
+
+                                        <span aria-hidden="true" className="h-8 w-px bg-ink/25 hidden sm:block" />
+
+                                        <div className="text-left font-[family-name:var(--font-ui)] uppercase tracking-[0.18em] text-[9px] leading-[1.4] opacity-70">
+                                            Хорошее место<br />отметка Яндекса
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div className="inline-flex items-center gap-3 border border-ink/40 px-4 py-2.5">
-                                <span className="text-rust text-base">🏛</span>
-                                <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.18em] text-[10px] leading-[1.4]">
-                                    Хорошее место<br />отметка Яндекса
-                                </div>
+
+                            {/* Photo column */}
+                            <div className="col-span-12 md:col-span-6 order-1 md:order-2">
+                                <img
+                                    src={heroImg}
+                                    alt="Бутик-отель ЛетягинЪ"
+                                    className="w-full h-full object-cover aspect-[4/5] md:aspect-auto md:max-h-[calc(100vh-80px)]"
+                                    onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                                />
                             </div>
                         </div>
-                    </div>
-
-                    <div className="col-span-12 md:col-span-6 order-1 md:order-2">
-                        <Img
-                            src={props.heroSlides?.[0]?.image_url}
-                            alt="Бутик-отель ЛетягинЪ"
-                            label="фасад особняка"
-                            className="aspect-[4/5] md:aspect-[4/5] md:max-h-[calc(100vh-160px)]"
-                        />
-                    </div>
-                </div>
-            </section>
+                    </section>
+                );
+            })()}
 
             {/* ─── BLOCK 02 · WIDGET (hero) ─────────────────────── */}
             <section className="bg-paper text-ink" id="widget-hero">
@@ -105,71 +127,116 @@ export default function Home(props) {
                 </div>
             </Section>
 
-            {/* ─── BLOCK 05 · ROOMS showcase ────────────────────── */}
-            <Section bg="surface">
-                <SectionHeader title="Номера" caption={e.rooms_subtitle || ''} />
-                <div className="grid grid-cols-12 gap-6">
-                    {featuredRooms.slice(0, 5).map((r, i) => (
+            {/* ─── BLOCK 05 · ROOMS showcase — full-bleed mixed-aspect gallery ─── */}
+            <section className="bg-surface text-ink">
+                <div className="max-w-[1440px] mx-auto px-6 md:px-12 pt-20 md:pt-28">
+                    <SectionHeader title="Номера" caption={e.rooms_subtitle || ''} />
+                </div>
+
+                {/* Full-width galley: grid-cols-12, mixed spans by pattern */}
+                <div className="px-3 md:px-5 pb-20 md:pb-28">
+                    <div className="grid grid-cols-2 md:grid-cols-12 gap-3 md:gap-4">
+                        {allRooms.map((r, i) => {
+                            // Ритм: [портрет · портрет · пейзаж] · [пейзаж · портрет · портрет] и далее
+                            const p = i % 6;
+                            const isLandscape = p === 2 || p === 3;
+                            const spanClass = isLandscape ? 'md:col-span-6' : 'md:col-span-3';
+                            const aspectClass = isLandscape ? 'aspect-[4/3]' : 'aspect-[3/4]';
+                            // Картинка: если есть hero_image_url из Orchid — используем, иначе из пула media-bank
+                            const src = r.hero_image_url || `/images/media-bank/${ROOMS_FALLBACK[i % ROOMS_FALLBACK.length]}`;
+
+                            return (
+                                <Link
+                                    key={r.id}
+                                    href={`/rooms/${r.slug}`}
+                                    className={`col-span-1 ${spanClass} group relative overflow-hidden`}
+                                >
+                                    <div className={`${aspectClass} overflow-hidden`}>
+                                        <img
+                                            src={src}
+                                            alt={r.name}
+                                            loading="lazy"
+                                            className="w-full h-full object-cover transition-transform duration-[var(--duration-slow)] group-hover:scale-[1.03]"
+                                        />
+                                    </div>
+
+                                    {/* Overlay с текстом — всегда видим, но с лёгким gradient снизу */}
+                                    <div className="absolute inset-0 bg-gradient-to-t from-ink/75 via-ink/30 to-transparent pointer-events-none" />
+
+                                    <div className="absolute inset-x-0 bottom-0 p-4 md:p-5 text-paper">
+                                        <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.18em] text-[10px] opacity-80 tnum mb-1">
+                                            {r.area_m2} м² · до {r.guests} {pluralGuests(r.guests)}
+                                        </div>
+                                        <div className="font-[family-name:var(--font-display)] text-lg md:text-xl leading-[1.15]">
+                                            {r.name}
+                                        </div>
+                                    </div>
+                                </Link>
+                            );
+                        })}
+                    </div>
+
+                    <div className="mt-10 text-center max-w-[1440px] mx-auto">
                         <Link
-                            key={r.id}
-                            href={`/rooms/${r.slug}`}
-                            className={`${i === 0 ? 'col-span-12 md:col-span-6' : 'col-span-6 md:col-span-3'} group`}
+                            href="/rooms"
+                            className="font-[family-name:var(--font-ui)] uppercase tracking-[0.16em] text-xs inline-block px-8 py-4 border border-ink hover:bg-ink hover:text-paper transition-colors"
                         >
-                            <Img
-                                src={r.hero_image_url}
-                                alt={r.name}
-                                label={r.name.toLowerCase()}
-                                className={`mb-4 ${i === 0 ? 'aspect-[4/3]' : 'aspect-[3/4]'}`}
-                            />
-                            <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.18em] text-[10px] text-moss mb-2 tnum">
-                                {r.area_m2} м² · до {r.guests} гостя
-                            </div>
-                            <h3 className="font-[family-name:var(--font-display)] text-xl md:text-2xl leading-[1.1] mb-2 group-hover:text-rust transition-colors">
-                                {r.name}
-                            </h3>
-                            <p className="font-[family-name:var(--font-body)] text-sm opacity-75 leading-relaxed">
-                                {r.short_description}
-                            </p>
+                            Страница каталога номеров →
                         </Link>
-                    ))}
+                    </div>
                 </div>
-                <div className="mt-10 text-center md:text-left">
-                    <Link
-                        href="/rooms"
-                        className="font-[family-name:var(--font-ui)] uppercase tracking-[0.16em] text-xs inline-block px-8 py-4 border border-ink hover:bg-ink hover:text-paper transition-colors"
-                    >
-                        Все 19 номеров →
-                    </Link>
-                </div>
-            </Section>
+            </section>
 
-            {/* ─── BLOCK 06a · Hotel services ───────────────────── */}
+            {/* ─── BLOCK 06 · К вашим услугам (общее + в номере в одном блоке) ── */}
             <Section bg="paper">
-                <SectionHeader title="Что есть в отеле" caption="Общие услуги" />
-                <div className="grid grid-cols-2 md:grid-cols-5 gap-x-6 gap-y-8">
-                    {services.map((s) => (
-                        <div key={s.id} className="flex flex-col gap-2">
-                            <div className="font-[family-name:var(--font-display)] text-xl leading-[1.2]">
-                                {s.name}
-                            </div>
-                            <div className="font-[family-name:var(--font-body)] text-sm opacity-70 leading-snug">
-                                {s.description}
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </Section>
+                <SectionHeader
+                    title="К вашим услугам"
+                    caption="Что ждёт гостя на уровне отеля и внутри каждого номера"
+                />
 
-            {/* ─── BLOCK 06b · In-room amenities ────────────────── */}
-            <Section bg="surface">
-                <SectionHeader title="В каждом номере есть" caption="Базовое оснащение" />
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-5 font-[family-name:var(--font-body)] text-base">
-                    {roomAmenities.map((a) => (
-                        <div key={a.id} className="flex items-center gap-3">
-                            <span className="w-1.5 h-1.5 rounded-full bg-rust" />
-                            <span>{a.name}</span>
+                <div className="grid grid-cols-12 gap-0 md:divide-x divide-ink/15 divide-y md:divide-y-0 border-y border-ink/15">
+                    {/* Левая колонка — в отеле */}
+                    <div className="col-span-12 md:col-span-6 py-10 md:py-12 md:pr-10 lg:pr-14">
+                        <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.24em] text-[10px] text-rust mb-8">
+                            В&nbsp;отеле
                         </div>
-                    ))}
+                        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-6">
+                            {services.map((s) => (
+                                <li key={s.id} className="flex gap-4">
+                                    <span className="mt-2 w-1.5 h-1.5 rounded-full bg-rust shrink-0" />
+                                    <div>
+                                        <div className="font-[family-name:var(--font-display)] text-lg md:text-xl leading-[1.2] mb-1">
+                                            {s.name}
+                                        </div>
+                                        {s.description && (
+                                            <div className="font-[family-name:var(--font-body)] text-sm opacity-70 leading-snug">
+                                                {s.description}
+                                            </div>
+                                        )}
+                                    </div>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
+                    {/* Правая колонка — в каждом номере */}
+                    <div className="col-span-12 md:col-span-6 py-10 md:py-12 md:pl-10 lg:pl-14">
+                        <div className="font-[family-name:var(--font-ui)] uppercase tracking-[0.24em] text-[10px] text-moss mb-8">
+                            В&nbsp;каждом номере
+                        </div>
+                        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-6">
+                            {roomAmenities.map((a) => (
+                                <li key={a.id} className="flex gap-4">
+                                    <span className="mt-2 w-1.5 h-1.5 rounded-full bg-moss shrink-0" />
+                                    <div>
+                                        <div className="font-[family-name:var(--font-display)] text-lg md:text-xl leading-[1.2]">
+                                            {a.name}
+                                        </div>
+                                    </div>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
                 </div>
             </Section>
 
@@ -192,7 +259,12 @@ export default function Home(props) {
                             </p>
                         </div>
                         <div className="col-span-12 md:col-span-5">
-                            <Placeholder className="aspect-[4/5] bg-paper/5 border-paper/20" label="блюдо шефа" />
+                            <img
+                                src="/images/dusya-main.jpg"
+                                alt="Ресторан «Дуся»"
+                                className="w-full aspect-[4/5] object-cover"
+                                loading="lazy"
+                            />
                         </div>
                     </div>
 
@@ -315,26 +387,56 @@ export default function Home(props) {
                 </div>
             </Section>
 
-            {/* ─── BLOCK 11 · History timeline ──────────────────── */}
+            {/* ─── BLOCK 11 · History timeline — Müller horizontal ──── */}
             <Section bg="surface">
                 <SectionHeader title="История особняка" caption={e.history_subtitle || ''} />
-                <ol className="border-l-2 border-rust pl-8 md:pl-12 space-y-10 max-w-3xl">
+
+                {/* Desktop: горизонтальный таймлайн со сплошной rust-линией поверху */}
+                <div className="hidden md:block relative">
+                    <div
+                        aria-hidden="true"
+                        className="absolute left-0 right-0 top-[6px] h-px bg-rust"
+                    />
+                    <ol
+                        className="grid gap-6 lg:gap-8 relative"
+                        style={{ gridTemplateColumns: `repeat(${historyPreview.length}, minmax(0, 1fr))` }}
+                    >
+                        {historyPreview.map((v) => (
+                            <li key={v.id} className="flex flex-col">
+                                <div className="w-3 h-3 rounded-full bg-rust shrink-0" />
+                                <div className="font-[family-name:var(--font-display)] text-2xl lg:text-3xl leading-none text-rust tnum mt-5 mb-3">
+                                    {v.year_label}
+                                </div>
+                                <div className="font-[family-name:var(--font-display)] text-base lg:text-lg leading-[1.25] mb-2">
+                                    {v.headline}
+                                </div>
+                                <p className="font-[family-name:var(--font-body)] text-xs lg:text-sm leading-[1.55] opacity-75">
+                                    {v.body}
+                                </p>
+                            </li>
+                        ))}
+                    </ol>
+                </div>
+
+                {/* Mobile: вертикальный таймлайн как был (на узком экране горизонталь нечитаема) */}
+                <ol className="md:hidden border-l-2 border-rust pl-8 space-y-8">
                     {historyPreview.map((v) => (
                         <li key={v.id} className="relative">
-                            <div className="absolute -left-[42px] md:-left-[54px] top-3 w-3 h-3 rounded-full bg-rust" />
-                            <div className="font-[family-name:var(--font-display)] text-2xl md:text-3xl leading-none text-rust tnum mb-2">
+                            <div className="absolute -left-[38px] top-2 w-3 h-3 rounded-full bg-rust" />
+                            <div className="font-[family-name:var(--font-display)] text-2xl leading-none text-rust tnum mb-2">
                                 {v.year_label}
                             </div>
-                            <div className="font-[family-name:var(--font-display)] text-lg md:text-xl mb-2 opacity-90">
+                            <div className="font-[family-name:var(--font-display)] text-lg mb-2 opacity-90">
                                 {v.headline}
                             </div>
-                            <p className="font-[family-name:var(--font-body)] text-base leading-[1.6] opacity-75 max-w-prose">
+                            <p className="font-[family-name:var(--font-body)] text-sm leading-[1.6] opacity-75">
                                 {v.body}
                             </p>
                         </li>
                     ))}
                 </ol>
-                <div className="mt-10">
+
+                <div className="mt-10 md:mt-14">
                     <Link
                         href="/about"
                         className="font-[family-name:var(--font-ui)] uppercase tracking-[0.16em] text-xs text-rust hover:underline underline-offset-4"
@@ -348,8 +450,14 @@ export default function Home(props) {
             <Section bg="paper">
                 <SectionHeader title="Детали" caption={e.gallery_subtitle || ''} />
                 <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
-                    {Array.from({ length: 12 }).map((_, i) => (
-                        <Placeholder key={i} className="aspect-square" label={`деталь ${i + 1}`} />
+                    {GALLERY_DETAILS.map((filename, i) => (
+                        <img
+                            key={i}
+                            src={`/images/media-bank/${filename}`}
+                            alt={`Деталь ${i + 1}`}
+                            loading="lazy"
+                            className="w-full aspect-square object-cover"
+                        />
                     ))}
                 </div>
             </Section>
@@ -422,6 +530,49 @@ export default function Home(props) {
         </Layout>
     );
 }
+
+/**
+ * Фолбэк-фото для блока «Номера», если у Room ещё нет загруженного hero.
+ * Берём из public/images/media-bank.
+ */
+const ROOMS_FALLBACK = [
+    'SPR_6855-HDR.jpg',
+    'SPR_6195-HDR.jpg',
+    'SPR_6570.jpg',
+    'SPR_6642-HDR.jpg',
+    'SPR_6760-HDR.jpg',
+    'SPR_6318-HDR.jpg',
+    'SPR_6658-HDR.jpg',
+    'SPR_6426-HDR.jpg',
+    'SPR_6309-HDR.jpg',
+    'SPR_6687-HDR.jpg',
+    'SPR_6730-HDR.jpg',
+    'SPR_6837-HDR.jpg',
+];
+
+function pluralGuests(n) {
+    if (n === 1) return 'гостя';
+    if (n >= 2 && n <= 4) return 'гостей';
+    return 'гостей';
+}
+
+/**
+ * 12 фото для блока «Детали».
+ */
+const GALLERY_DETAILS = [
+    'SPR_6789-HDR.jpg',
+    'SPR_6855-HDR.jpg',
+    'SPR_6837-HDR.jpg',
+    'SPR_6742-HDR.jpg',
+    'SPR_6678-HDR.jpg',
+    'SPR_6519-HDR.jpg',
+    'SPR_6549-HDR.jpg',
+    'SPR_6861-HDR.jpg',
+    'SPR_6603-HDR.jpg',
+    'SPR_6486-HDR.jpg',
+    'SPR_6684-HDR.jpg',
+    'SPR_6270-HDR.jpg',
+];
 
 function categoryLabel(c) {
     return ({

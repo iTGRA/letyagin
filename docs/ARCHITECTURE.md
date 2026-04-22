@@ -478,6 +478,43 @@ Announcement / Popup — override getKeyType(), singleton()-метод для id
 SiteSettings  static get($key, $default = null) с Cache
 ```
 
+### 4.1 Image-accessors (добавлено 2026-04-21)
+
+Модели с полями `hero_image_id` / `image_id` / `photo_id` / `og_image_id` —
+резолвят Orchid Attachment в URL через единый трейт:
+
+```php
+// app/Concerns/ResolvesAttachment.php
+trait ResolvesAttachment {
+    public function resolveAttachmentUrl(?int $id): ?string { ... }
+}
+
+// В моделях:
+use ResolvesAttachment;
+protected $appends = ['hero_image_url'];
+public function getHeroImageUrlAttribute(): ?string {
+    return $this->resolveAttachmentUrl($this->hero_image_id);
+}
+```
+
+**Где применяется:**
+- Room → `hero_image_url`
+- HeroSlide/NearbyPlace/RestaurantMenuItem/GalleryItem/HistoryMilestone/
+  Popup/RoomPhoto → `image_url`
+- TeamMember → `photo_url`
+- Page → `og_image_url`
+
+Accessor автоматически в `toArray()` → Inertia props.
+
+**Двухуровневая стратегия hero-фото (Home.jsx):**
+1. Если есть `HeroSlide[0].image_url` (админка загрузила) — используем
+2. Fallback — файл `/public/images/hero-home.jpg`
+3. Если ни того, ни другого — hero рендерится без фото
+
+Аналогично в Rooms block Home: `room.hero_image_url` или фолбэк из
+`/images/media-bank/*.jpg` (по индексу из статического массива
+`ROOMS_FALLBACK` в Home.jsx).
+
 ---
 
 ## 5. Маршруты
