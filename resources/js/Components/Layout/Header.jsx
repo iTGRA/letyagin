@@ -27,6 +27,7 @@ export default function Header({ heroTone = 'light' }) {
     const { siteSettings } = usePage().props;
     const phone = siteSettings?.contacts?.phone || '';
     const phoneTel = siteSettings?.contacts?.phone_tel || '';
+    const address = siteSettings?.contacts?.address_full || '';
 
     const [open, setOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
@@ -63,6 +64,19 @@ export default function Header({ heroTone = 'light' }) {
                 </nav>
 
                 <div className="hidden md:flex items-center gap-5">
+                    {address && (
+                        <a
+                            href="https://yandex.ru/maps/?text=Самара+Самарская+69"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="letyagin-header__link hidden lg:flex items-center gap-1.5 font-[family-name:var(--font-ui)] uppercase tracking-[0.14em] text-[10px] opacity-60 hover:opacity-100 transition-opacity"
+                        >
+                            <svg width="10" height="12" viewBox="0 0 10 12" fill="none" aria-hidden="true" className="shrink-0 opacity-70">
+                                <path d="M5 0C2.79 0 1 1.79 1 4c0 3 4 8 4 8s4-5 4-8c0-2.21-1.79-4-4-4Zm0 5.5A1.5 1.5 0 1 1 5 2.5a1.5 1.5 0 0 1 0 3Z" fill="currentColor"/>
+                            </svg>
+                            <span>Самарская, 69</span>
+                        </a>
+                    )}
                     {phone && (
                         <a href={`tel:${phoneTel}`} className="letyagin-header__link font-[family-name:var(--font-ui)] uppercase tracking-[0.18em] text-[11px] tnum transition-colors">
                             {phone}
@@ -97,6 +111,19 @@ export default function Header({ heroTone = 'light' }) {
                         <div className="h-px bg-ink/15 my-2"></div>
                         {phone && (
                             <a href={`tel:${phoneTel}`} className="tnum">{phone}</a>
+                        )}
+                        {address && (
+                            <a
+                                href="https://yandex.ru/maps/?text=Самара+Самарская+69"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center gap-1.5 opacity-60"
+                            >
+                                <svg width="9" height="11" viewBox="0 0 10 12" fill="none" aria-hidden="true" className="shrink-0">
+                                    <path d="M5 0C2.79 0 1 1.79 1 4c0 3 4 8 4 8s4-5 4-8c0-2.21-1.79-4-4-4Zm0 5.5A1.5 1.5 0 1 1 5 2.5a1.5 1.5 0 0 1 0 3Z" fill="currentColor"/>
+                                </svg>
+                                <span>Самарская, 69</span>
+                            </a>
                         )}
                         <a href="#widget-hero" className="inline-block bg-rust text-paper px-5 py-3 text-center" onClick={() => setOpen(false)}>
                             Забронировать
