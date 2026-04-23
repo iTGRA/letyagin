@@ -38,3 +38,7 @@ Thumbs.db
 .vscode
 .cursor
 .zed
+
+# Серверные пути (acme-challenge, скриншоты доков)
+/public/.well-known/
+/docs/imgs/
