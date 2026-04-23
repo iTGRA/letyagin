@@ -305,31 +305,45 @@ export default function Home(props) {
 
             {/* ─── BLOCK 09 · Corporate ─────────────────────────── */}
             <Section bg="surface">
-                <SectionHeader title="Корпоративный договор" caption={e.corporate_subtitle || ''} />
-                <div className="grid grid-cols-12 gap-6 md:gap-10">
-                    <div className="col-span-12 md:col-span-6">
-                        <p className="font-[family-name:var(--font-body)] text-lg leading-[1.65] mb-8">
-                            {e.corporate_body || ''}
-                        </p>
+                <div className="grid grid-cols-12 gap-x-10 md:gap-x-16 gap-y-8">
+
+                    {/* ── Левая колонка: заголовок → trust-bar → кнопка */}
+                    <div className="col-span-12 md:col-span-5 flex flex-col">
+                        <SectionHeader title="Корпоративный договор" caption={e.corporate_subtitle || ''} />
+
+                        {/* Trust-bar */}
+                        <div className="mt-8 mb-10 flex flex-col divide-y divide-ink/10 border-y border-ink/10">
+                            {[
+                                { n: '−10%', t: 'Скидка от базового тарифа' },
+                                { n: '★',    t: 'Приоритет при заселении'   },
+                                { n: '📑',   t: 'Акт, счёт-фактура, УПД'    },
+                            ].map((f, i) => (
+                                <div key={i} className="flex items-center gap-5 py-4">
+                                    <span className="font-[family-name:var(--font-display)] text-2xl text-rust tnum shrink-0 w-14 leading-none">
+                                        {f.n}
+                                    </span>
+                                    <span className="font-[family-name:var(--font-ui)] uppercase tracking-[0.14em] text-[11px] leading-none">
+                                        {f.t}
+                                    </span>
+                                </div>
+                            ))}
+                        </div>
+
                         <Link
                             href="/corporate"
-                            className="font-[family-name:var(--font-ui)] uppercase tracking-[0.16em] text-xs inline-block px-8 py-4 bg-rust text-paper hover:bg-[color:var(--color-rust-deep)] transition-colors"
+                            className="font-[family-name:var(--font-ui)] uppercase tracking-[0.16em] text-xs inline-block self-start px-8 py-4 bg-rust text-paper hover:bg-[color:var(--color-rust-deep)] transition-colors"
                         >
                             Оставить заявку на договор →
                         </Link>
                     </div>
-                    <div className="col-span-12 md:col-span-6 grid grid-cols-1 gap-4">
-                        {[
-                            { n: '−10%', t: 'Скидка от базового тарифа' },
-                            { n: '★',    t: 'Приоритет при заселении' },
-                            { n: '📑',   t: 'Акт, счёт-фактура, УПД' },
-                        ].map((f, i) => (
-                            <div key={i} className="flex items-center gap-5 bg-paper p-5">
-                                <div className="font-[family-name:var(--font-display)] text-3xl text-rust tnum shrink-0 min-w-[60px]">{f.n}</div>
-                                <div className="font-[family-name:var(--font-body)] text-base">{f.t}</div>
-                            </div>
-                        ))}
+
+                    {/* ── Правая колонка: описание */}
+                    <div className="col-span-12 md:col-span-7 flex items-center">
+                        <p className="font-[family-name:var(--font-body)] text-lg leading-[1.7] text-ink/80">
+                            {e.corporate_body || ''}
+                        </p>
                     </div>
+
                 </div>
             </Section>
 
@@ -488,19 +502,28 @@ export default function Home(props) {
 
             {/* ─── BLOCK 14 · FAQ ───────────────────────────────── */}
             <Section bg="paper">
-                <SectionHeader title="Коротко о важном" caption={e.faq_subtitle || ''} />
-                <div className="max-w-3xl">
-                    {faqs.map((f, i) => (
-                        <details key={f.id} className="border-b border-ink/15 py-5 group" open={i === 0}>
-                            <summary className="flex justify-between items-start gap-4 cursor-pointer list-none font-[family-name:var(--font-display)] text-xl md:text-2xl leading-[1.2]">
-                                <span>{f.question}</span>
-                                <span className="font-[family-name:var(--font-ui)] text-xl opacity-40 shrink-0 group-open:rotate-45 transition-transform">+</span>
-                            </summary>
-                            <div className="mt-4 font-[family-name:var(--font-body)] text-base leading-[1.65] opacity-80 max-w-prose">
-                                {f.answer}
-                            </div>
-                        </details>
-                    ))}
+                <div className="grid grid-cols-12 gap-x-10 md:gap-x-16">
+
+                    {/* ── Левая колонка: заголовок */}
+                    <div className="col-span-12 md:col-span-4 mb-8 md:mb-0">
+                        <SectionHeader title="Коротко о важном" caption={e.faq_subtitle || ''} />
+                    </div>
+
+                    {/* ── Правая колонка: аккордеон */}
+                    <div className="col-span-12 md:col-span-8">
+                        {faqs.map((f, i) => (
+                            <details key={f.id} className="border-b border-ink/15 py-5 group" open={i === 0}>
+                                <summary className="flex justify-between items-start gap-4 cursor-pointer list-none font-[family-name:var(--font-display)] text-xl md:text-2xl leading-[1.2]">
+                                    <span>{f.question}</span>
+                                    <span className="font-[family-name:var(--font-ui)] text-xl opacity-40 shrink-0 group-open:rotate-45 transition-transform duration-[var(--duration-standard)]">+</span>
+                                </summary>
+                                <div className="mt-4 font-[family-name:var(--font-body)] text-base leading-[1.65] opacity-80 max-w-prose">
+                                    {f.answer}
+                                </div>
+                            </details>
+                        ))}
+                    </div>
+
                 </div>
             </Section>
 
