@@ -111,6 +111,12 @@
 
 .letyagin-header {
   background: transparent;
+  /* Рамка всегда 1px — только цвет переходит, нет layout-shift при hover */
+  border-bottom: 1px solid transparent;
+  transition:
+    background-color var(--duration-slow) var(--ease-standard),
+    border-color     var(--duration-slow) var(--ease-standard),
+    color            var(--duration-quick) var(--ease-standard);
 }
 
 .letyagin-header--on-light,
@@ -126,10 +132,10 @@
 .letyagin-header--on-light:hover,
 .letyagin-header--on-dark:hover,
 .letyagin-header--scrolled {
-  background: color-mix(in srgb, var(--color-paper) 95%, transparent);
-  -webkit-backdrop-filter: saturate(120%) blur(8px);
-  backdrop-filter: saturate(120%) blur(8px);
-  border-bottom: 1px solid color-mix(in srgb, var(--color-ink) 10%, transparent);
+  background: color-mix(in srgb, var(--color-paper) 92%, transparent);
+  -webkit-backdrop-filter: saturate(120%) blur(12px);
+  backdrop-filter: saturate(120%) blur(12px);
+  border-bottom-color: color-mix(in srgb, var(--color-ink) 8%, transparent);
 }
 
 .letyagin-header--on-light:hover,

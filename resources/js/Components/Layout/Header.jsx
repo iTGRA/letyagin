@@ -47,7 +47,7 @@ export default function Header({ heroTone = 'light' }) {
 
     return (
         <header
-            className={`letyagin-header ${toneClass} ${stateClass} sticky top-0 z-50 transition-colors duration-[var(--duration-standard)] ease-[var(--ease-standard)]`}
+            className={`letyagin-header ${toneClass} ${stateClass} sticky top-0 z-50`}
         >
             <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-14 flex items-center justify-between gap-4 h-16 md:h-20">
 
