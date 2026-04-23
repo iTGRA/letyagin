@@ -51,25 +51,30 @@ export default function Header({ heroTone = 'light' }) {
         >
             <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-14 flex items-center justify-between gap-4 h-16 md:h-20">
 
-                <Link href="/" className="shrink-0 font-[family-name:var(--font-display)] text-2xl md:text-3xl leading-none tracking-tight">
+                {/* Логотип — leading-none + flex self-center гарантируют
+                    что гарнитура display-шрифта не плавает выше/ниже оси */}
+                <Link href="/" className="shrink-0 flex items-center font-[family-name:var(--font-display)] text-2xl md:text-3xl leading-none tracking-tight">
                     ЛетягинЪ
                 </Link>
 
-                <nav className="hidden lg:flex items-center gap-7 font-[family-name:var(--font-ui)] uppercase tracking-[0.18em] text-[11px]">
+                {/* Навигация — line-height:1 на каждом пункте,
+                    padding убран (линия ::after уходит через bottom: -4px) */}
+                <nav className="hidden lg:flex items-center gap-7 font-[family-name:var(--font-ui)] uppercase tracking-[0.18em] text-[11px] leading-none">
                     {NAV.map((n) => (
-                        <Link key={n.href} href={n.href} className="letyagin-header__link letyagin-header__navlink transition-colors">
+                        <Link key={n.href} href={n.href} className="letyagin-header__link letyagin-header__navlink">
                             {n.label}
                         </Link>
                     ))}
                 </nav>
 
-                <div className="hidden md:flex items-center gap-5">
+                {/* Правая группа — все три элемента leading-none для единой оси */}
+                <div className="hidden md:flex items-center gap-5 leading-none">
                     {address && (
                         <a
                             href="https://yandex.ru/maps/?text=Самара+Самарская+69"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="letyagin-header__link hidden lg:flex items-center gap-1.5 font-[family-name:var(--font-ui)] uppercase tracking-[0.14em] text-[10px] opacity-60 hover:opacity-100 transition-opacity"
+                            className="letyagin-header__link hidden lg:flex items-center gap-1.5 font-[family-name:var(--font-ui)] uppercase tracking-[0.14em] text-[10px] leading-none opacity-60 hover:opacity-100 transition-opacity"
                         >
                             <svg width="10" height="12" viewBox="0 0 10 12" fill="none" aria-hidden="true" className="shrink-0 opacity-70">
                                 <path d="M5 0C2.79 0 1 1.79 1 4c0 3 4 8 4 8s4-5 4-8c0-2.21-1.79-4-4-4Zm0 5.5A1.5 1.5 0 1 1 5 2.5a1.5 1.5 0 0 1 0 3Z" fill="currentColor"/>
@@ -78,11 +83,11 @@ export default function Header({ heroTone = 'light' }) {
                         </a>
                     )}
                     {phone && (
-                        <a href={`tel:${phoneTel}`} className="letyagin-header__link font-[family-name:var(--font-ui)] uppercase tracking-[0.18em] text-[11px] tnum transition-colors">
+                        <a href={`tel:${phoneTel}`} className="letyagin-header__link font-[family-name:var(--font-ui)] uppercase tracking-[0.18em] text-[11px] leading-none tnum transition-colors">
                             {phone}
                         </a>
                     )}
-                    <a href="#widget-hero" className="font-[family-name:var(--font-ui)] uppercase tracking-[0.14em] text-[11px] px-5 py-3 bg-rust text-paper hover:bg-[color:var(--color-rust-deep)] transition-colors">
+                    <a href="#widget-hero" className="font-[family-name:var(--font-ui)] uppercase tracking-[0.14em] text-[11px] leading-none px-5 py-[11px] bg-rust text-paper hover:bg-[color:var(--color-rust-deep)] transition-colors">
                         Забронировать
                     </a>
                 </div>

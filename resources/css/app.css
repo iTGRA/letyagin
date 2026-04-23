@@ -151,17 +151,19 @@
   color: var(--color-rust);
 }
 
-/* Навигация: тонкая линия под пунктом при hover (ровно в ширину слова) */
+/* Навигация: тонкая линия под пунктом при hover (ровно в ширину слова).
+   НЕТ padding-bottom — линия плавает ниже через bottom: -4px,
+   bounding box не увеличивается, текст остаётся на оси flex-контейнера. */
 .letyagin-header__navlink {
   position: relative;
-  padding-bottom: 4px;
+  line-height: 1;
 }
 .letyagin-header__navlink::after {
   content: '';
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 0;
+  bottom: -4px;
   height: 1px;
   background: currentColor;
   transform: scaleX(0);
